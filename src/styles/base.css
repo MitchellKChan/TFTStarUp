@@ -1,0 +1,42 @@
+body {
+    background-color: #E6ECF0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* following classes are for testing wireframe placement on the page;
+    will not be part of prod */
+.section {
+    border: 3px solid black;
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: space-between;
+}
+
+.top div {
+    width: 200px;
+}
+
+.top-right {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    max-width: 600px;
+    width: 65%;
+}

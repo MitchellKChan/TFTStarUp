@@ -25,5 +25,8 @@
     "sass-loader": "^13.3.2",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "prettier": "3.0.3"
   }
 }

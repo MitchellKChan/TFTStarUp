@@ -38,7 +38,7 @@ for configuring rolldown settings
 
 ## Wireframes
 
-![wireframe](image-2.png)
+![wireframe](image.png)
 
 - Timer will show the configured time for the rolldown and can be configured
 - Nav links includes links to this project's Github repo and my LinkedIn
