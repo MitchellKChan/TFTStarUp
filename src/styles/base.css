@@ -40,3 +40,9 @@ body {
     max-width: 600px;
     width: 65%;
 }
+
+/* following classes are for styling the data dragon request test button */
+.data-dragon {
+    width: 200px;
+    height: 50px;
+}

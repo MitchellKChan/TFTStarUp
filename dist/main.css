@@ -94,6 +94,12 @@ body {
     max-width: 600px;
     width: 65%;
 }
+
+/* following classes are for styling the data dragon request test button */
+.data-dragon {
+    width: 200px;
+    height: 50px;
+}
 /*!********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/shop/shop.css ***!
   \********************************************************************************************************/
