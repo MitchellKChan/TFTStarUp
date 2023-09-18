@@ -1,15 +1,14 @@
-import Champions from "./scripts/champions";
+import Units from "./scripts/units";
 import Shop from "./scripts/shop";
 
-// Initialize champions variable to be assigned to a Champions object once champion info is fetched
-let champions;
+// Initialize units variable to be assigned to a Units object once champion info is fetched
+let units;
 try {
-  const res = await fetch("https://ddragon.leagueoflegends.com/cdn/13.18.1/data/en_US/tft-champion.json");
+  const res = await fetch("./src/scripts/tft-champion.json");
   if (res.ok) {
       const promise = await res.json();
       const list = promise.data;
-      const keys = Object.keys(list);
-      champions = new Champions(list, keys);
+      units = new Units(list);
   } else {
       throw res;
   }
@@ -21,7 +20,7 @@ try {
 const body = document.querySelector("body");
 
 // Declare shop object for tracking level, gold, tier odds, and shop units
-const shop = new Shop(3, 2, 4, champions);
+const shop = new Shop(3, 0, 6, units);
 
 // Declare objects for the top section, which contains the title, timer,
 // nav links, and settings
@@ -49,10 +48,7 @@ const expButton = document.createElement("button");
 const refreshButton = document.createElement("button");
 const levelInfo = document.createElement("div");
 const shopButtons = document.createElement("div");
-const shopUnits = document.createElement("div");
-
-// const unitImageTester = document.createElement("img");
-// unitImageTester.src = champions.championImage(champions.randomChampion());
+// const shopUnits = document.createElement("div");
 
 // set inner text and classess for top section objects
 title.innerText = "TFT Star Up";
@@ -106,36 +102,29 @@ refreshButton.classList.add("section", "refresh-button");
 shopButtons.classList.add("shop-buttons");
 shopButtons.append(expButton, refreshButton);
 
-shopUnits.classList.add("section", "shop-units");
 shop.refresh();
-Object.values(shop.units).forEach(slot => {
-  const slotEl = document.createElement("div");
-  const icon = document.createElement("img");
-  icon.src = shop.champions.championImage(slot);
-  slotEl.append(icon);
-  slotEl.classList.add("section", "shop-unit");
-  shopUnits.append(slotEl);
-});
 
-shopEl.append(levelInfo, gold, shopButtons, shopUnits);
+shopEl.append(levelInfo, gold, shopButtons, shop.generateShopUnits());
 
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
   event.preventDefault();
   shop.refresh();
-  Object.values(shop.units).forEach((slot, i) => {
-    shopUnits.children[i].children[0].src = shop.champions.championImage(slot);
-  });
+  // generate a new shopUnits div to replace the current one
+  shopEl.replaceChild(shop.generateShopUnits(), shopEl.children[3]); 
 }
 
 // function to handle events that trigger buying experience
 function handleBuyExp(event) {
   event.preventDefault();
+  shop.buyExp();
   if (shop.level < 9) {
-    shop.buyExp();
     levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
-    level.innerText = shop.level;
+  } else {
+    levelProgress.innerText = shop.expToNextLevel;
   }
+  level.innerText = shop.level;
+  odds.innerText = Shop.tierOdds[shop.level];
 }
 
 // add event listener to refreshButton to test shop refreshing

@@ -1,10 +1,11 @@
 class Shop {
-    constructor(startingLevel = 3, currentEpx = 2, expToNextLevel = 4, champions) {
+    constructor(startingLevel = 3, currentEpx = 0, expToNextLevel = 6, units) {
         this.level = startingLevel;
         this.currentEpx = currentEpx;
         this.expToNextLevel = expToNextLevel;
-        this.champions = champions;
-        this.units = {
+        this.units = units;
+        this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]); // an array of unit info objects
+        this.slots = {
             slot1: "slot 1",
             slot2: "slot 2",
             slot3: "slot 3",
@@ -13,24 +14,41 @@ class Shop {
         };
     }
 
+    buyExp() {
+        if (this.level < 9) {
+            this.currentEpx += 4;
+            if (this.currentEpx >= this.expToNextLevel) this.levelUp();
+        }
+    }
+    
+    levelUp() {
+        this.level++;
+        this.currentEpx = this.currentEpx - this.expToNextLevel;
+        this.expToNextLevel = Shop.levelExp[this.level];
+        this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]);
+    }
+
     refresh() {
-        const champions = this.champions;
-        Object.keys(this.units).map(key => {
-            this.units[key] = champions.randomChampion();
+        Object.keys(this.slots).map(key => {
+            this.slots[key] = this.units.randomUnit(this.unitPool);
         });
     }
 
-    buyExp() {
-        this.currentEpx += 4;
-        this.levelUp();
-    }
-
-    levelUp() {
-        if (this.currentEpx >= this.expToNextLevel && this.level < 9) {
-            this.level++;
-            this.currentEpx = this.currentEpx - this.expToNextLevel;
-            this.expToNextLevel = Shop.levelExp[this.level];
-        }
+    generateShopUnits() {
+        const shopUnits = document.createElement("div");
+        shopUnits.classList.add("section", "shop-units");
+        Object.values(this.slots).forEach(slot => {
+            const slotEl = document.createElement("div");
+            const icon = document.createElement("img");
+            const name = document.createElement("div");
+            icon.src = this.units.unitImage(slot);
+            name.innerText = slot.name;
+            name.classList.add("shop-unit-name");
+            slotEl.append(icon, name);
+            slotEl.classList.add("section", "shop-unit", `tier-${slot.tier}`);
+            shopUnits.append(slotEl);
+        });
+        return shopUnits;
     }
 }
 
@@ -54,6 +72,7 @@ Shop.levelExp = {
     6: 40,
     7: 60,
     8: 84,
+    9: "MAX"
 };
 
 export default Shop;

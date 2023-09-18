@@ -52,6 +52,14 @@ table {
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/base.css ***!
   \***************************************************************************************************/
+:root {
+    --tier-1: #bbbbbbe0;
+    --tier-2: #14cc73;
+    --tier-3: #54c3ff;
+    --tier-4: #de0ebd;
+    --tier-5: #ffc430;
+}
+
 body {
     background-color: #E6ECF0;
 }
@@ -67,7 +75,8 @@ body {
 /* following classes are for testing wireframe placement on the page;
     will not be part of prod */
 .section {
-    border: 3px solid black;
+    border: 1px solid black;
+    font-size: 1em;
 }
 
 .top {
@@ -79,6 +88,9 @@ body {
 
 .top div {
     width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-right {
@@ -90,7 +102,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
 }
 
 /*!********************************************************************************************************!*\
@@ -105,6 +117,7 @@ body {
 
 .shop-level-info {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .shop-buttons {
@@ -124,8 +137,38 @@ body {
     display: flex;
 }
 
+.shop-unit {
+    margin: 5px;
+    border: 5px solid;
+}
+
 .shop-unit img {
     width: 180px;
+}
+
+.shop-unit-name {
+    display: flex;
+    justify-content: right;
+}
+
+.tier-1 {
+    border-color: var(--tier-1);
+}
+
+.tier-2 {
+    border-color: var(--tier-2);
+}
+
+.tier-3 {
+    border-color: var(--tier-3);
+}
+
+.tier-4 {
+    border-color: var(--tier-4);
+}
+
+.tier-5 {
+    border-color: var(--tier-5);
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/timer/timer.css ***!
@@ -146,6 +189,14 @@ body {
   \**********************************************************************************************************/
 .bench {
     height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*!**********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/title/title.css ***!
+  \**********************************************************************************************************/
+.title {
     display: flex;
     justify-content: center;
     align-items: center;

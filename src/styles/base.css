@@ -1,3 +1,11 @@
+:root {
+    --tier-1: #bbbbbbe0;
+    --tier-2: #14cc73;
+    --tier-3: #54c3ff;
+    --tier-4: #de0ebd;
+    --tier-5: #ffc430;
+}
+
 body {
     background-color: #E6ECF0;
 }
@@ -13,7 +21,8 @@ body {
 /* following classes are for testing wireframe placement on the page;
     will not be part of prod */
 .section {
-    border: 3px solid black;
+    border: 1px solid black;
+    font-size: 1em;
 }
 
 .top {
@@ -25,6 +34,9 @@ body {
 
 .top div {
     width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-right {
@@ -36,5 +48,5 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
 }
