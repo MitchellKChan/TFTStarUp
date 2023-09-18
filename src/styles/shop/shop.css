@@ -1,7 +1,31 @@
 .shop {
-    height: 100px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     margin-top: 20px;
+}
+
+.shop-level-info {
+    display: flex;
+}
+
+.shop-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.exp-button:hover {
+    background-color: orange;
+}
+
+.refresh-button:hover {
+    background-color: gold;
+}
+
+.shop-units {
+    display: flex;
+}
+
+.shop-unit img {
+    width: 180px;
 }

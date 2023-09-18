@@ -91,24 +91,41 @@ body {
     flex-direction: column;
     position: absolute;
     bottom: 0;
-    max-width: 600px;
-    width: 65%;
 }
 
-/* following classes are for styling the data dragon request test button */
-.data-dragon {
-    width: 200px;
-    height: 50px;
-}
 /*!********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/shop/shop.css ***!
   \********************************************************************************************************/
 .shop {
-    height: 100px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     margin-top: 20px;
+}
+
+.shop-level-info {
+    display: flex;
+}
+
+.shop-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.exp-button:hover {
+    background-color: orange;
+}
+
+.refresh-button:hover {
+    background-color: gold;
+}
+
+.shop-units {
+    display: flex;
+}
+
+.shop-unit img {
+    width: 180px;
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/timer/timer.css ***!
