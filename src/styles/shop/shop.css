@@ -1,7 +1,6 @@
 .shop {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     margin-top: 20px;
 }
 
@@ -37,10 +36,10 @@
     height: 100px;
 }
 
-.shop-unit-name {
+/* .shop-unit-name {
     display: flex;
     justify-content: right;
-}
+} */
 
 .tier-1 {
     border-color: var(--tier-1);

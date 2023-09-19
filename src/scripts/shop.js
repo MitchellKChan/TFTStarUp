@@ -1,5 +1,5 @@
 class Shop {
-    constructor(startingLevel = 3, currentEpx = 0, expToNextLevel = 6, units) {
+    constructor(startingLevel = 3, currentEpx = 0, expToNextLevel = 6, units, handleBuyUnit) {
         this.level = startingLevel;
         this.currentEpx = currentEpx;
         this.expToNextLevel = expToNextLevel;
@@ -12,6 +12,8 @@ class Shop {
             slot4: "slot 4",
             slot5: "slot 5"
         };
+        this.handleBuyUnit = handleBuyUnit; // event function to pass bought unit to bench
+        // this.shopEl = this.generateShopUnits();
     }
 
     buyExp() {
@@ -41,13 +43,17 @@ class Shop {
             const slotEl = document.createElement("div");
             const icon = document.createElement("img");
             const name = document.createElement("div");
-            icon.src = this.units.unitImage(slot);
+            icon.src = this.units.shopUnitImage(slot);
             name.innerText = slot.name;
             name.classList.add("shop-unit-name");
             slotEl.append(icon, name);
             slotEl.classList.add("section", "shop-unit", `tier-${slot.tier}`);
+            // add unit name as data attribute for populating bench spaces with correct unit icon
+            for (const child of slotEl.children) child.dataset.unitName = slot.name;
             shopUnits.append(slotEl);
         });
+        // add event listener for buying units 
+        shopUnits.addEventListener("click", e => this.handleBuyUnit(e));
         return shopUnits;
     }
 }

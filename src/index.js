@@ -1,5 +1,6 @@
 import Units from "./scripts/units";
 import Shop from "./scripts/shop";
+import Bench from "./scripts/bench";
 
 // Initialize units variable to be assigned to a Units object once champion info is fetched
 let units;
@@ -8,7 +9,7 @@ try {
   if (res.ok) {
       const promise = await res.json();
       const list = promise.data;
-      units = new Units(list);
+      units = new Units(list); // assign a Units object to units for constructing a Shop object
   } else {
       throw res;
   }
@@ -19,8 +20,11 @@ try {
 // Declare object for the page's body
 const body = document.querySelector("body");
 
-// Declare shop object for tracking level, gold, tier odds, and shop units
-const shop = new Shop(3, 0, 6, units);
+// Declare a Shop object for tracking level, gold, tier odds, and shop units
+const shop = new Shop(3, 0, 6, units, handleBuyUnit);
+
+// Declare a Bench object for tracking units that have been purchased
+const bench = new Bench();
 
 // Declare objects for the top section, which contains the title, timer,
 // nav links, and settings
@@ -33,7 +37,6 @@ const topRight = document.createElement("div");
 
 // Declare objects for the bottom section, which contains the
 // bench and shop
-const bench = document.createElement("div");
 const shopEl = document.createElement("div");
 const bottomSection = document.createElement("div");
 
@@ -68,13 +71,10 @@ topSection.classList.add("top");
 topSection.append(title, timer, topRight);
 
 // set inner text and classess for bottom section objects
-bench.innerText = "bench";
-bench.classList.add("bench", "section");
-
 shopEl.classList.add("shop", "section");
 
 bottomSection.classList.add("bottom");
-bottomSection.append(bench, shopEl);
+bottomSection.append(bench.benchEl, shopEl);
 
 // set inner text and clases for shop objects
 level.innerText = shop.level;
@@ -105,6 +105,31 @@ shop.refresh();
 
 shopEl.append(levelInfo, gold, shopButtons, shop.generateShopUnits());
 
+// add event listener to refreshButton to refresh shop
+refreshButton.addEventListener("click", e => {
+  handleRefresh(e);
+});
+
+body.addEventListener("keydown", e => {
+  if (e.code === "KeyD") handleRefresh(e);
+});
+
+// add event listener to expButton to buy experience
+expButton.addEventListener("click", e => {
+  handleBuyExp(e);
+})
+
+body.addEventListener("keydown", e => {
+  if (e.code === "KeyF") handleBuyExp(e);
+});
+
+// add event listener to shopUnits to buy units and add to bench
+function handleBuyUnit(event) {
+  event.preventDefault();
+  const unitName = event.target.dataset.unitName;
+  if (unitName) bench.buyUnit(unitName);
+}
+
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
   event.preventDefault();
@@ -125,22 +150,5 @@ function handleBuyExp(event) {
   level.innerText = shop.level;
   odds.innerText = Shop.tierOdds[shop.level];
 }
-
-// add event listener to refreshButton to test shop refreshing
-refreshButton.addEventListener("click", e => {
-  handleRefresh(e);
-});
-
-body.addEventListener("keydown", e => {
-  if (e.code === "KeyD") handleRefresh(e);
-});
-
-expButton.addEventListener("click", e => {
-  handleBuyExp(e);
-})
-
-body.addEventListener("keydown", e => {
-  if (e.code === "KeyF") handleBuyExp(e);
-});
 
 body.append(topSection, bottomSection);

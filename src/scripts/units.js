@@ -1,3 +1,5 @@
+const dataDragonUrl = "https://ddragon.leagueoflegends.com/cdn/";
+
 class Units {
     constructor(list) {
         this.list = list;
@@ -15,8 +17,8 @@ class Units {
         return tierUnits[randomIndex];
     }
     
-    unitImage(unit) {
-        return `https://ddragon.leagueoflegends.com/cdn/13.18.1/img/tft-champion/${unit.image.full}`;
+    shopUnitImage(unit) {
+        return `${dataDragonUrl}13.18.1/img/tft-champion/${unit.image.full}`;
     }
 
     // private function only invoked by unitPool

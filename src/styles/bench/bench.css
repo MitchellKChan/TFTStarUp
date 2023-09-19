@@ -1,6 +1,17 @@
 .bench {
-    height: 50px;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.slot {
+    width: 100px;
+    margin: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.slot img {
+    width: 80px;
 }
