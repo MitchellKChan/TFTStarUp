@@ -2,9 +2,12 @@ const dataDragonUrl = "https://ddragon.leagueoflegends.com/cdn/";
 
 class Bench {
     constructor() {
-        this.slots = this.#emptyBench();
-        this.benchEl = this.#generateBench(this.slots);
-        this.units = {};
+        this.slots = this.#emptyBench(); // units currently on the bench
+        this.benchEl = this.#generateBench(this.slots); // bench element in DOM
+        // units' slot indices organized by unit star level
+        // key: unit name plus star level suffix (1,2,3); e.g., "Graves1" != "Graves2"
+        // value: array of slot indices; key is deleted if array is empty
+        this.units = {}; 
     }
 
     buyUnit(unitName) {
@@ -12,32 +15,49 @@ class Bench {
         while (slotIndex < 9 && this.benchEl.children[slotIndex].children.length != 0) slotIndex++;
         if (slotIndex < 9) {
             unitName = this.#imageNameReformat(unitName);
-            const slotKey = `slot${slotIndex + 1}`
-            const slot = this.#generateSlot(slotKey, unitName);
-            if (Object.keys(this.units).includes(unitName)) {
-                if (this.units[unitName].length === 2) {
+            const slotKey = `slot${slotIndex + 1}`;
+            const oneStarUnit = `${unitName}1`;
+            let slot;
+            if (!Object.keys(this.units).includes(oneStarUnit)) {
+                // create index array for the unit at a one-star in units object
+                slot = this.#generateSlot(slotKey, unitName);
+                this.units[oneStarUnit] = [slotIndex];
+                this.slots[slotKey] = oneStarUnit;
+                this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
+            } else {
+                if (this.units[oneStarUnit].length === 2) {
                     // star up first copy of unit and remove the second one from the bench
-                    const firstCopyIndex = this.units[unitName][0];
-                    this.benchEl.children[firstCopyIndex].classList.toggle("two-star");
-                    this.benchEl.children[firstCopyIndex].classList.toggle("one-star");
-                    this.removeUnit(unitName, this.units[unitName][1]);
-                    this.units[unitName] = [firstCopyIndex];
+                    const firstCopyIndex = this.units[oneStarUnit][0];
+                    const firstCopySlotKey = `slot${firstCopyIndex + 1}`;
+                    const twoStarUnit = `${unitName}2`;
+                    // remove the two one-start units at their indices
+                    this.units[oneStarUnit].sort().forEach(index => {
+                        this.removeUnit(oneStarUnit, index);
+                    });
+                    // add index for two-starred unit to this.units
+                    if (!Object.keys(this.units).includes(twoStarUnit)) {
+                        this.units[twoStarUnit] = [firstCopyIndex];
+                    } else {
+                        this.units[twoStarUnit].push(firstCopyIndex);
+                    }
+                    this.slots[firstCopySlotKey] = twoStarUnit;
+                    slot = this.#generateSlot(firstCopySlotKey, unitName);
+                    slot.classList.toggle("two-star");
+                    slot.classList.toggle("one-star");
+                    this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
                 } else {
                     // add index to unit's index array in units object
-                    this.units[unitName].push(slotIndex);
-                    this.slots[slotKey] = unitName + "1";
+                    this.units[oneStarUnit].push(slotIndex);
+                    slot = this.#generateSlot(slotKey, unitName);
+                    this.slots[slotKey] = oneStarUnit;
                     this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
                 }
-            } else {
-                // create index array for the unit in units object
-                this.units[unitName] = [slotIndex];
-                this.slots[slotKey] = unitName + "1";
-                this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
             }
         } else {
             console.log("bench is full, need to sell units to buy more");
         }
         console.log(this.units);
+        console.log(this.slots);
     }
     
     benchUnitImage(unitName) {
@@ -62,15 +82,17 @@ class Bench {
     removeUnit(unitName, slotIndex) {
         // free up the slot in this.slots at slotIndex
         const slotKey = `slot${slotIndex + 1}`;
+        const unitKey = this.slots[slotKey];
         this.slots[slotKey] = "empty";
+        console.log(`unitKey: ${unitKey}, slotKey: ${slotKey}`);
 
-        // if the indices array for unitName in this.units contains slotIndex:
+        // if the indices array for unitKey in this.units contains slotIndex:
         // - remove it from the array
-        this.units[unitName] = this.units[unitName].filter(index => index != slotIndex);
+        this.units[unitKey] = this.units[unitKey].filter(index => index != slotIndex);
 
-        // if the indices array for unitName in this.units is empty
-        // - delete unitName from this.units
-        if (this.units[unitName].length < 1) delete this.units[unitName];
+        // if the indices array for unitKey in this.units is empty
+        // - delete unitKey from this.units
+        if (this.units[unitKey].length < 1) delete this.units[unitKey];
 
         // generate empty slot element and replace the previous one at slotIndex in this.benchEl
         const emptySlot = this.#generateSlot(slotKey, "empty");
