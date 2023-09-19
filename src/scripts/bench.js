@@ -44,21 +44,36 @@ class Bench {
         if (unitName === "Silco") {
             // Silco has no champion icon as he is a TFT-specific unit; using the TFT picture as the bench image
             return `${dataDragonUrl}13.18.1/img/tft-champion/TFT9_Silco.TFT_Set9_Stage2.png`;
+
         } else if (unitName === "Ksante") {
             // K'Sante's tile image does not follow the general Void name reformatting
             return `${dataDragonUrl}img/champion/tiles/KSante_0.jpg`;
+
         } else if (unitName === "Reksai") {
-            // K'Sante's tile image does not follow the general Void name reformatting
+            // Rek'sai's tile image does not follow the general Void name reformatting
             return `${dataDragonUrl}img/champion/tiles/RekSai_0.jpg`;
+
         } else {
+            // standard unit tile image retrieval
             return `${dataDragonUrl}img/champion/tiles/${unitName}_0.jpg`;
         }
     }
     
     removeUnit(unitName, slotIndex) {
-        const unitSlot = this.units[unitName].indexOf(slotIndex);
+        // free up the slot in this.slots at slotIndex
+        const slotKey = `slot${slotIndex + 1}`;
+        this.slots[slotKey] = "empty";
 
-        const emptySlot = this.#generateSlot(`slot${slotIndex + 1}`, "empty");
+        // if the indices array for unitName in this.units contains slotIndex:
+        // - remove it from the array
+        this.units[unitName] = this.units[unitName].filter(index => index != slotIndex);
+
+        // if the indices array for unitName in this.units is empty
+        // - delete unitName from this.units
+        if (this.units[unitName].length < 1) delete this.units[unitName];
+
+        // generate empty slot element and replace the previous one at slotIndex in this.benchEl
+        const emptySlot = this.#generateSlot(slotKey, "empty");
         this.benchEl.replaceChild(emptySlot, this.benchEl.children[slotIndex]);        
     }
 
