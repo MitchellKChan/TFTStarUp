@@ -30,7 +30,7 @@ class Shop {
 
     refresh() {
         Object.keys(this.slots).map(key => {
-            this.slots[key] = this.units.randomUnit(this.unitPool);
+            this.slots[key] = this.units.randomUnit(this.unitPool, Shop.tierOdds[this.level]);
         });
     }
 

@@ -48,7 +48,6 @@ const expButton = document.createElement("button");
 const refreshButton = document.createElement("button");
 const levelInfo = document.createElement("div");
 const shopButtons = document.createElement("div");
-// const shopUnits = document.createElement("div");
 
 // set inner text and classess for top section objects
 title.innerText = "TFT Star Up";
