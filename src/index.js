@@ -123,12 +123,27 @@ body.addEventListener("keydown", e => {
   if (e.code === "KeyF") handleBuyExp(e);
 });
 
-// add event listener to shopUnits to buy units and add to bench
-function handleBuyUnit(event) {
-  event.preventDefault();
-  const unitName = event.target.dataset.unitName;
-  if (unitName) bench.buyUnit(unitName);
-}
+
+// add event listener to document to track mouse position for
+// for selling bench units
+document.addEventListener("mousemove", e => {
+  window.mouse = [e.clientX, e.clientY];
+})
+
+// add event listener to document to conditionally sell a bench
+// unit if the mouse position is on one
+document.addEventListener("keydown", e => {
+  if (e.code === "KeyE") {
+    const hoverElement = document.elementFromPoint(window.mouse[0], window.mouse[1]);
+    const unitName = hoverElement.dataset.unitName;
+    if (unitName) {
+      // unit to sell is at the position contained by the 4th index
+      // of slotKey's data attribute; slotkey = `slot${slotIndex}`
+      const slotIndex = Number(hoverElement.dataset.slotKey[4]) - 1;
+      bench.removeUnit(unitName, slotIndex);
+    }
+  }
+})
 
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
@@ -149,6 +164,23 @@ function handleBuyExp(event) {
   }
   level.innerText = shop.level;
   odds.innerText = Shop.tierOdds[shop.level];
+}
+
+// function to handle events that trigger unit purchases; event
+// listener added to return value of shop.generateShopUnits() with 
+// this function in shop.js
+function handleBuyUnit(event) {
+  event.preventDefault();
+  const unitName = event.target.dataset.unitName;
+  if (unitName) bench.buyUnit(unitName);
+}
+
+// function to handle events that trigger selling units
+function handleSellUnit(event) {
+  event.preventDefault();
+  // if (event.ta) {
+
+  // }
 }
 
 body.append(topSection, bottomSection);

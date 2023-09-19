@@ -24,11 +24,14 @@ user interaction will focus exclusively on the game aspects integral to
 rolling down: the **shop** and **unit bench**.  In the tool, users will be 
 able to:
 
-- Configure settings for their rolldown, such as the timer, starting level, 
-starting gold, and starting units on the bench
-- Remap the hotkeys for buying experience, shop refreshes, and selling units
+- Configure settings for their rolldown, such as the timer and starting level
 - Make shop purchases by either clicking on a unit or by dragging it
-outside of the shop
+outside of the shop, which then appear on an empty bench slot
+- Upgrade a bench unit's star level (**"star up"** a unit) when a third copy
+of a unit is purchased; two of the three copies will combine with the first,
+freeing up additional bench space to purchase more units
+- Sell a bench unit by presing "E" while hovering over it or by dragging it
+into the shop
 
 Additionally, this project will include: 
 
@@ -78,7 +81,7 @@ make a purchase or sell a unit. Then, focus on rolldown setting
 configuration: adjusting starting time, starting gold, starting level, and 
 starting units on bench.
 
-- Wednesday: Finish implementing user controls, and focus on styling, as  
+- Wednesday: Finish implementing user controls, and focus on styling, as 
 well as implementing the different unit tier color schemes and nav links. 
 If time, start on bonuses.
 
@@ -91,6 +94,7 @@ There are many features this rolldown practice tool could eventually have
 available.  Some anticipated updates could allow users to:
 - Change the arena skin background
 - Move units around on the bench
+- Configure rolldown settings such as starting gold and starting bench units
 - Adjust the difficulty of rolldowns, such as changing unit appearance
 in the shop and toggling random changes to the unit pool
 - Set rolldown challenges or objectives, such as creating a checklist of 

@@ -4,20 +4,42 @@ class Bench {
     constructor() {
         this.slots = this.#emptyBench();
         this.benchEl = this.#generateBench(this.slots);
+        this.units = {};
     }
 
     buyUnit(unitName) {
         let slotIndex = 0;
-        while (slotIndex < 9 && this.benchEl.children[slotIndex].innerText != "empty") slotIndex++;
+        while (slotIndex < 9 && this.benchEl.children[slotIndex].children.length != 0) slotIndex++;
         if (slotIndex < 9) {
             unitName = this.#imageNameReformat(unitName);
-            const slot = this.#generateSlot(`slot${slotIndex + 1}`, unitName);
-            this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
+            const slotKey = `slot${slotIndex + 1}`
+            const slot = this.#generateSlot(slotKey, unitName);
+            if (Object.keys(this.units).includes(unitName)) {
+                if (this.units[unitName].length === 2) {
+                    // star up first copy of unit and remove the second one from the bench
+                    const firstCopyIndex = this.units[unitName][0];
+                    this.benchEl.children[firstCopyIndex].classList.toggle("two-star");
+                    this.benchEl.children[firstCopyIndex].classList.toggle("one-star");
+                    this.removeUnit(unitName, this.units[unitName][1]);
+                    this.units[unitName] = [firstCopyIndex];
+                } else {
+                    // add index to unit's index array in units object
+                    this.units[unitName].push(slotIndex);
+                    this.slots[slotKey] = unitName + "1";
+                    this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
+                }
+            } else {
+                // create index array for the unit in units object
+                this.units[unitName] = [slotIndex];
+                this.slots[slotKey] = unitName + "1";
+                this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
+            }
         } else {
             console.log("bench is full, need to sell units to buy more");
         }
+        console.log(this.units);
     }
-
+    
     benchUnitImage(unitName) {
         if (unitName === "Silco") {
             // Silco has no champion icon as he is a TFT-specific unit; using the TFT picture as the bench image
@@ -32,10 +54,17 @@ class Bench {
             return `${dataDragonUrl}img/champion/tiles/${unitName}_0.jpg`;
         }
     }
+    
+    removeUnit(unitName, slotIndex) {
+        const unitSlot = this.units[unitName].indexOf(slotIndex);
+
+        const emptySlot = this.#generateSlot(`slot${slotIndex + 1}`, "empty");
+        this.benchEl.replaceChild(emptySlot, this.benchEl.children[slotIndex]);        
+    }
 
     // private function only invoked by constructor
     #generateBench(benchSlots = {}) {
-        if (Object.keys(benchSlots) != 9) benchSlots = this.#emptyBench();
+        if (Object.keys(benchSlots).length != 9) benchSlots = this.#emptyBench();
         const bench = document.createElement("div");
         bench.classList.add("bench", "section");
         Object.entries(benchSlots).forEach(([slotKey, slotValue]) => {
@@ -46,11 +75,14 @@ class Bench {
 
     #generateSlot(slotKey, unitName) {
         const slot = document.createElement("div");
-        slot.classList.add(`${slotKey}`,"slot", "section");
+        slot.classList.add("slot");
         if (unitName === "empty") {
-            slot.innerText = unitName;
+            slot.classList.toggle("empty");
         } else {
+            slot.classList.toggle("one-star");
             const unitIcon = document.createElement("img");
+            unitIcon.dataset.slotKey = slotKey;
+            unitIcon.dataset.unitName = unitName;
             unitIcon.src = this.benchUnitImage(unitName);
             slot.append(unitIcon);
         }
@@ -78,6 +110,8 @@ class Bench {
         }
         return unitName;
     }
+
+
 }
 
 export default Bench;

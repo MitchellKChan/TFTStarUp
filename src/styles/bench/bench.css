@@ -5,13 +5,31 @@
 }
 
 .slot {
-    width: 100px;
-    margin: 3px;
-    display: flex;
+    width: 90px;
+    border: 5px solid;
+    /* margin: 5px; */
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .slot img {
-    width: 80px;
+    width: 90px;
+}
+
+.empty {
+    /* 0.0 opacity for a "transparent border" when a slot has no unit */
+    border-color: rgba(255, 255, 255, 0.0);
+}
+
+.one-star {
+    border-color: #ffffff;
+}
+
+.two-star {
+    border-color: #c0c0c0;
+}
+
+.three-star {
+    border-color: #ffd700;
 }
