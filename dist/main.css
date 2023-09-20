@@ -60,17 +60,23 @@ table {
     --tier-5: #ffc430;
 }
 
-body {
-    background-color: #E6ECF0;
-}
 
 body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: rgba(0, 0, 0, 0.2);
+    background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt6f62f9def3f86fa4/6303bd3beff6500f70d3940b/Ao_Shin_s_Summit_Spa_JPG.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0% 90%;
+    background-size: 110vw;
+}
 
 /* following classes are for testing wireframe placement on the page;
     will not be part of prod */
@@ -102,7 +108,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 1px;
+    bottom: 0;
 }
 
 /*!********************************************************************************************************!*\
@@ -111,7 +117,7 @@ body {
 .shop {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 2vw;
 }
 
 .shop-level-info {
@@ -119,31 +125,38 @@ body {
     justify-content: space-evenly;
 }
 
+.shop-interface {
+    display: flex;
+    flex-direction: row;
+}
+
 .shop-buttons {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .exp-button:hover {
-    background-color: orange;
+    background-color: #add8e6;
 }
 
 .refresh-button:hover {
-    background-color: gold;
+    background-color: #90ee90;
 }
 
 .shop-units {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .shop-unit {
-    margin: 5px;
+    width: 13vw;
     border: 5px solid;
 }
 
 .shop-unit img {
-    width: 180px;
-    height: 100px;
+    width: 13vw;
+    height: 7vw;
 }
 
 /* .shop-unit-name {
@@ -188,22 +201,18 @@ body {
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/bench/bench.css ***!
   \**********************************************************************************************************/
 .bench {
-    height: 100px;
+    height: 6vw;
     display: flex;
     justify-content: space-evenly;
 }
 
 .slot {
-    width: 90px;
+    width: 5vw;
     border: 5px solid;
-    /* margin: 5px; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .slot img {
-    width: 90px;
+    width: inherit;
 }
 
 .empty {

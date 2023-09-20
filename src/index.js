@@ -51,6 +51,8 @@ const expButton = document.createElement("button");
 const refreshButton = document.createElement("button");
 const levelInfo = document.createElement("div");
 const shopButtons = document.createElement("div");
+const shopInterface = document.createElement("div");
+
 
 // set inner text and classess for top section objects
 title.innerText = "TFT Star Up";
@@ -86,16 +88,17 @@ odds.classList.add("section");
 levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
 levelProgress.classList.add("section");
 
-levelInfo.classList.add("section", "shop-level-info")
-levelInfo.append(level, odds, levelProgress);
-
 gold.innerText = "gold";
 gold.classList.add("section");
 
-expButton.innerText = "exp button";
+levelInfo.classList.add("section", "shop-level-info")
+levelInfo.append(level, levelProgress, odds, gold);
+
+
+expButton.innerText = "exp-button";
 expButton.classList.add("section", "exp-button");
 
-refreshButton.innerText = "refresh button";
+refreshButton.innerText = "refresh-button";
 refreshButton.classList.add("section", "refresh-button");
 
 shopButtons.classList.add("shop-buttons");
@@ -103,7 +106,10 @@ shopButtons.append(expButton, refreshButton);
 
 shop.refresh();
 
-shopEl.append(levelInfo, gold, shopButtons, shop.generateShopUnits());
+shopInterface.classList.add("shop-interface", "section");
+shopInterface.append(shopButtons, shop.generateShopUnits());
+
+shopEl.append(levelInfo, shopInterface);
 
 // add event listener to refreshButton to refresh shop
 refreshButton.addEventListener("click", e => {
@@ -150,7 +156,7 @@ function handleRefresh(event) {
   event.preventDefault();
   shop.refresh();
   // generate a new shopUnits div to replace the current one
-  shopEl.replaceChild(shop.generateShopUnits(), shopEl.children[3]); 
+  shopEl.children[1].replaceChild(shop.generateShopUnits(), shopEl.children[1].children[1]); 
 }
 
 // function to handle events that trigger buying experience
@@ -173,14 +179,6 @@ function handleBuyUnit(event) {
   event.preventDefault();
   const unitName = event.target.dataset.unitName;
   if (unitName) bench.buyUnit(unitName);
-}
-
-// function to handle events that trigger selling units
-function handleSellUnit(event) {
-  event.preventDefault();
-  // if (event.ta) {
-
-  // }
 }
 
 body.append(topSection, bottomSection);

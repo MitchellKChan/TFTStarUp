@@ -29,8 +29,6 @@ class Bench {
                     this.#addTwoStarUnit(unitName, oneStarKey);
                     const twoStarKey = `${unitName}2`;
                     if (this.#canThreeStar(twoStarKey)) {
-                        console.log(this.units);
-                        console.log(this.slots);
                         this.#addThreeStarUnit(unitName, twoStarKey);
                     }
                 } else {

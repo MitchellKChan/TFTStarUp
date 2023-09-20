@@ -1,7 +1,7 @@
 .shop {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 2vw;
 }
 
 .shop-level-info {
@@ -9,31 +9,38 @@
     justify-content: space-evenly;
 }
 
+.shop-interface {
+    display: flex;
+    flex-direction: row;
+}
+
 .shop-buttons {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .exp-button:hover {
-    background-color: orange;
+    background-color: #add8e6;
 }
 
 .refresh-button:hover {
-    background-color: gold;
+    background-color: #90ee90;
 }
 
 .shop-units {
     display: flex;
+    justify-content: space-evenly;
 }
 
 .shop-unit {
-    margin: 5px;
+    width: 13vw;
     border: 5px solid;
 }
 
 .shop-unit img {
-    width: 180px;
-    height: 100px;
+    width: 13vw;
+    height: 7vw;
 }
 
 /* .shop-unit-name {

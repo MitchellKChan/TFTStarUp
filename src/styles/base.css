@@ -6,17 +6,23 @@
     --tier-5: #ffc430;
 }
 
-body {
-    background-color: #E6ECF0;
-}
 
 body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: rgba(0, 0, 0, 0.2);
+    background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt6f62f9def3f86fa4/6303bd3beff6500f70d3940b/Ao_Shin_s_Summit_Spa_JPG.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0% 90%;
+    background-size: 110vw;
+}
 
 /* following classes are for testing wireframe placement on the page;
     will not be part of prod */
@@ -48,5 +54,5 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 1px;
+    bottom: 0;
 }
