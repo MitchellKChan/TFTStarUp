@@ -16,48 +16,34 @@ class Bench {
         if (slotIndex < 9) {
             unitName = this.#imageNameReformat(unitName);
             const slotKey = `slot${slotIndex + 1}`;
-            const oneStarUnit = `${unitName}1`;
+            const oneStarKey = `${unitName}1`;
             let slot;
-            if (!Object.keys(this.units).includes(oneStarUnit)) {
+            if (!this.#hasCopy(oneStarKey)) {
                 // create index array for the unit at a one-star in units object
                 slot = this.#generateSlot(slotKey, unitName);
-                this.units[oneStarUnit] = [slotIndex];
-                this.slots[slotKey] = oneStarUnit;
+                this.units[oneStarKey] = [slotIndex];
+                this.slots[slotKey] = oneStarKey;
                 this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
             } else {
-                if (this.units[oneStarUnit].length === 2) {
-                    // star up first copy of unit and remove the second one from the bench
-                    const firstCopyIndex = this.units[oneStarUnit][0];
-                    const firstCopySlotKey = `slot${firstCopyIndex + 1}`;
-                    const twoStarUnit = `${unitName}2`;
-                    // remove the two one-start units at their indices
-                    this.units[oneStarUnit].sort().forEach(index => {
-                        this.removeUnit(oneStarUnit, index);
-                    });
-                    // add index for two-starred unit to this.units
-                    if (!Object.keys(this.units).includes(twoStarUnit)) {
-                        this.units[twoStarUnit] = [firstCopyIndex];
-                    } else {
-                        this.units[twoStarUnit].push(firstCopyIndex);
+                if (this.#canStarUp(oneStarKey)) {
+                    this.#addTwoStarUnit(unitName, oneStarKey);
+                    const twoStarKey = `${unitName}2`;
+                    if (this.#canThreeStar(twoStarKey)) {
+                        console.log(this.units);
+                        console.log(this.slots);
+                        this.#addThreeStarUnit(unitName, twoStarKey);
                     }
-                    this.slots[firstCopySlotKey] = twoStarUnit;
-                    slot = this.#generateSlot(firstCopySlotKey, unitName);
-                    slot.classList.toggle("two-star");
-                    slot.classList.toggle("one-star");
-                    this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
                 } else {
                     // add index to unit's index array in units object
-                    this.units[oneStarUnit].push(slotIndex);
+                    this.units[oneStarKey].push(slotIndex);
                     slot = this.#generateSlot(slotKey, unitName);
-                    this.slots[slotKey] = oneStarUnit;
+                    this.slots[slotKey] = oneStarKey;
                     this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
                 }
             }
         } else {
             console.log("bench is full, need to sell units to buy more");
         }
-        console.log(this.units);
-        console.log(this.slots);
     }
     
     benchUnitImage(unitName) {
@@ -79,12 +65,11 @@ class Bench {
         }
     }
     
-    removeUnit(unitName, slotIndex) {
+    removeUnit(slotIndex) {
         // free up the slot in this.slots at slotIndex
         const slotKey = `slot${slotIndex + 1}`;
         const unitKey = this.slots[slotKey];
         this.slots[slotKey] = "empty";
-        console.log(`unitKey: ${unitKey}, slotKey: ${slotKey}`);
 
         // if the indices array for unitKey in this.units contains slotIndex:
         // - remove it from the array
@@ -110,6 +95,7 @@ class Bench {
         return bench;
     }
 
+    // private function invoked by buyUnit, removeUnit, and #generateBench
     #generateSlot(slotKey, unitName) {
         const slot = document.createElement("div");
         slot.classList.add("slot");
@@ -148,7 +134,61 @@ class Bench {
         return unitName;
     }
 
+    // private functions only invoked by buyUnit to appropriately update 
+    // this.slots, this.benchEl, and this.units based on units' star levels
+    #hasCopy(unitKey) {
+        return Object.keys(this.units).includes(unitKey);
+    }
 
+    #canStarUp(unitKey) {
+        return this.units[unitKey].length === 2;
+    }
+
+    #canThreeStar(unitKey) {
+        return this.units[unitKey].length === 3;
+    }
+
+    #addTwoStarUnit(unitName, oneStarKey) {
+        // star up first copy of unit and remove the second one from the bench
+        const firstCopyIndex = this.units[oneStarKey].sort()[0];
+        const firstCopySlotKey = `slot${firstCopyIndex + 1}`;
+        const twoStarKey = `${unitName}2`;
+        // remove the two one-starred units at their indices
+        this.units[oneStarKey].sort().forEach(index => {
+            this.removeUnit(index);
+        });
+        if (!this.#hasCopy(twoStarKey)) {
+            this.units[twoStarKey] = [firstCopyIndex];
+        } else {
+            this.units[twoStarKey].push(firstCopyIndex);
+        }
+        this.slots[firstCopySlotKey] = twoStarKey;
+        const slot = this.#generateSlot(firstCopySlotKey, unitName);
+        slot.classList.toggle("two-star");
+        slot.classList.toggle("one-star");
+        this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
+    }
+
+    #addThreeStarUnit(unitName, twoStarKey) {
+        // star up first copy of unit and remove the second one from the bench
+        const firstCopyIndex = this.units[twoStarKey].sort()[0];
+        const firstCopySlotKey = `slot${firstCopyIndex + 1}`;
+        const threeStarKey = `${unitName}3`;
+        // remove the two two-starred units at their indices
+        this.units[twoStarKey].sort().forEach(index => {
+            this.removeUnit(index);
+        });
+        if (!this.#hasCopy(threeStarKey)) {
+            this.units[threeStarKey] = [firstCopyIndex];
+        } else {
+            this.units[threeStarKey].push(firstCopyIndex);
+        }
+        this.slots[firstCopySlotKey] = threeStarKey;
+        const slot = this.#generateSlot(firstCopySlotKey, unitName);
+        slot.classList.toggle("two-star");
+        slot.classList.toggle("three-star");
+        this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
+    }
 }
 
 export default Bench;

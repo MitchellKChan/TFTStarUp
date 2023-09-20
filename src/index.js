@@ -140,7 +140,7 @@ document.addEventListener("keydown", e => {
       // unit to sell is at the position contained by the 4th index
       // of slotKey's data attribute; slotkey = `slot${slotIndex}`
       const slotIndex = Number(hoverElement.dataset.slotKey[4]) - 1;
-      bench.removeUnit(unitName, slotIndex);
+      bench.removeUnit(slotIndex);
     }
   }
 })
