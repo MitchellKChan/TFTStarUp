@@ -1,3 +1,4 @@
+import Modal from "./scripts/util/modal";
 import Units from "./scripts/units";
 import Shop from "./scripts/shop";
 import Bench from "./scripts/bench";
@@ -17,30 +18,38 @@ try {
   console.log(err);
 }
 
-// Declare object for the page's body
+// declare object for the page's body
 const body = document.querySelector("body");
+body.style.backgroundImage = "url(src/styles/pageBackground.jpeg)";
 
-// Declare a Shop object for tracking level, gold, tier odds, and shop units
+// declare object for the modal
+const modal = document.querySelector(".modal");
+
+// declare object for the settings form in the modal
+const form = document.querySelector(".settings-form");
+
+// declare a Shop object for tracking level, gold, tier odds, and shop units
 const shop = new Shop(3, 0, 6, units, handleBuyUnit);
 
-// Declare a Bench object for tracking units that have been purchased
+// declare a Bench object for tracking units that have been purchased
 const bench = new Bench();
 
-// Declare objects for the top section, which contains the title, timer,
+// declare objects for the top section, which contains the title, timer,
 // nav links, and settings
 const title = document.createElement("div");
 const timer = document.createElement("div");
 const navLinks = document.createElement("div");
 const settings = document.createElement("div");
+const settingsIcon = document.createElement("img");
 const topSection = document.createElement("div");
 const topRight = document.createElement("div");
 
-// Declare objects for the bottom section, which contains the
+// declare objects for the bottom section, which contains the
 // bench and shop
 const shopEl = document.createElement("div");
 const bottomSection = document.createElement("div");
 
-// Declare objects contained by the shop object, which are the 
+// declare objects contained by the shop object, which are the 
 // current level, current shop odds, current gold, progress to 
 // next level, buy exp button, refresh button, and shop units
 const level = document.createElement("div");
@@ -63,7 +72,10 @@ timer.classList.add("timer", "section");
 
 navLinks.innerText = "navLinks";
 
-settings.innerText = "settings";
+settingsIcon.src = "src/styles/gear.png";
+settingsIcon.classList.add("settings-icon");
+
+settings.append(settingsIcon);
 settings.classList.add("settings");
 
 topRight.append(navLinks, settings);
@@ -111,7 +123,12 @@ shopInterface.append(shopButtons, shop.generateShopUnits());
 
 shopEl.append(levelInfo, shopInterface);
 
-// add event listener to refreshButton to refresh shop
+// add event listener for opening modal
+settingsIcon.addEventListener("click", e => {
+  handleOpenModal(e);
+});
+
+// add event listeners for shop refreshes
 refreshButton.addEventListener("click", e => {
   handleRefresh(e);
 });
@@ -120,10 +137,10 @@ body.addEventListener("keydown", e => {
   if (e.code === "KeyD") handleRefresh(e);
 });
 
-// add event listener to expButton to buy experience
+// add event listeners for buying experience
 expButton.addEventListener("click", e => {
   handleBuyExp(e);
-})
+});
 
 body.addEventListener("keydown", e => {
   if (e.code === "KeyF") handleBuyExp(e);
@@ -134,22 +151,18 @@ body.addEventListener("keydown", e => {
 // for selling bench units
 document.addEventListener("mousemove", e => {
   window.mouse = [e.clientX, e.clientY];
-})
+});
 
 // add event listener to document to conditionally sell a bench
 // unit if the mouse position is on one
 document.addEventListener("keydown", e => {
-  if (e.code === "KeyE") {
-    const hoverElement = document.elementFromPoint(window.mouse[0], window.mouse[1]);
-    const unitName = hoverElement.dataset.unitName;
-    if (unitName) {
-      // unit to sell is at the position contained by the 4th index
-      // of slotKey's data attribute; slotkey = `slot${slotIndex}`
-      const slotIndex = Number(hoverElement.dataset.slotKey[4]) - 1;
-      bench.removeUnit(slotIndex);
-    }
-  }
-})
+  if (e.code === "KeyE") handleSellUnit(e);
+});
+
+// add event listener to form to close the modal and start the app
+form.addEventListener("submit", e => {
+  handleStartApp(e);
+});
 
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
@@ -179,6 +192,32 @@ function handleBuyUnit(event) {
   event.preventDefault();
   const unitName = event.target.dataset.unitName;
   if (unitName) bench.buyUnit(unitName);
+}
+
+// function to handle events that trigger selling of units
+function handleSellUnit(event) {
+  event.preventDefault();
+  const hoverElement = document.elementFromPoint(window.mouse[0], window.mouse[1]);
+  const unitName = hoverElement.dataset.unitName;
+  const slotKey = hoverElement.dataset.slotKey;
+  if (unitName && slotKey) {
+    // unit to sell is at the position contained by the 4th index
+    // of the slotKey data attribute; slotkey = `slot${slotIndex}`
+    const slotIndex = Number(slotKey[4]) - 1;
+    bench.removeUnit(slotIndex);
+  }
+}
+
+// function to handle events that trigger opening the modal
+function handleOpenModal(event) {
+  event.preventDefault();
+  modal.classList.toggle("hidden");
+}
+
+// function to handle events that trigger starting the app
+function handleStartApp(event) {
+  event.preventDefault();
+  modal.classList.toggle("hidden");
 }
 
 body.append(topSection, bottomSection);

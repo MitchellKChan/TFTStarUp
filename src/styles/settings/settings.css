@@ -1,3 +1,13 @@
 .settings {
     text-align: right;
 }
+
+.settings-icon {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.settings-icon:hover {
+    background: radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    /* background: rgba(255, 255, 255, 0); */
+}

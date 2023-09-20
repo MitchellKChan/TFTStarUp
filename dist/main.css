@@ -52,14 +52,14 @@ table {
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/base.css ***!
   \***************************************************************************************************/
+/* variables to style shop units based on their tier */
 :root {
-    --tier-1: #bbbbbb;
+    --tier-1: #bbbbbb36;
     --tier-2: #14cc73;
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
 }
-
 
 body {
     min-height: 100vh;
@@ -69,19 +69,45 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+/* styling for background image */
 body {
     background-color: rgba(0, 0, 0, 0.2);
-    background-image: url(https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt6f62f9def3f86fa4/6303bd3beff6500f70d3940b/Ao_Shin_s_Summit_Spa_JPG.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 0% 90%;
     background-size: 110vw;
 }
 
+/* modal background; displayed when page is newly loaded */
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* modal content; shows the welcome messsage and application instructions */
+.modal-content {
+    background-color: #fefefe;
+    margin: 12% auto;
+    padding: 25px;
+    border: 5px solid #888888;
+    width: 60%;
+}
+
 /* following classes are for testing wireframe placement on the page;
     will not be part of prod */
 .section {
-    border: 1px solid black;
+    border: 1px solid #000000;
     font-size: 1em;
 }
 
@@ -197,6 +223,16 @@ body {
 .settings {
     text-align: right;
 }
+
+.settings-icon {
+    width: 30px;
+    border-radius: 50%;
+}
+
+.settings-icon:hover {
+    background: radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    /* background: rgba(255, 255, 255, 0); */
+}
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/bench/bench.css ***!
   \**********************************************************************************************************/
@@ -207,7 +243,7 @@ body {
 }
 
 .slot {
-    width: 5vw;
+    width: 6vw;
     border: 5px solid;
 }
 
