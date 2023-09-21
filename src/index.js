@@ -33,7 +33,10 @@ seconds.innerText = slider.value;
 
 // add event listener to seconds element to display real-time selected starting
 // time in form
-slider.addEventListener("input", e => seconds.innerText = e.target.value);
+slider.addEventListener("input", e => {
+  seconds.innerText = e.target.value;
+  timer.innerText = e.target.value;
+});
 
 // declare a Shop object for tracking level, gold, tier odds, and shop units
 const shop = new Shop(3, 0, 6, units, handleBuyUnit);
@@ -74,7 +77,7 @@ const shopInterface = document.createElement("div");
 title.innerText = "TFT Star Up";
 title.classList.add("title", "section");
 
-timer.innerText = "timer";
+timer.innerText = slider.value;
 timer.classList.add("timer", "section");
 
 navLinks.innerText = "navLinks";
@@ -236,11 +239,21 @@ function refreshHotkey(event) {
 function buyExpHotkey(event) {
   if (event.code === "KeyF") handleBuyExp(event);
 }
+
+let time;
+
 // function to begin timer countdown
 function startRolldown() {
   // enable hot keys for shop refreshes and buying experience
   body.addEventListener("keydown", refreshHotkey);
   body.addEventListener("keydown", buyExpHotkey);
+  time = setInterval(() => {
+    if (timer.innerText > 0) {
+      timer.innerText = Number(timer.innerText) - 1;
+    } else {
+      stopRolldown();
+    }
+  }, 1000);
 }
 
 // function to end timer countdown
@@ -248,6 +261,8 @@ function stopRolldown() {
   // disable hot keys for shop refreshes and buying experience
   body.removeEventListener("keydown", refreshHotkey);
   body.removeEventListener("keydown", buyExpHotkey);
+  modal.classList.toggle("hidden");
+  clearInterval(time);
 }
 
 body.append(topSection, bottomSection);
