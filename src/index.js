@@ -129,7 +129,7 @@ Shop.generateTierEls(odds, shop.level);
 levelProgress.classList.add("level-info");
 levelProgress.innerText = `Exp to Next Level: ${shop.currentEpx}/${shop.expToNextLevel}`;
 
-levelInfo.classList.add("shop-level-info")
+levelInfo.classList.add("shop-level-info", "section")
 levelInfo.append(level, levelProgress, odds);
 
 

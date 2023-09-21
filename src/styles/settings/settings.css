@@ -4,7 +4,8 @@
 }
 
 .social {
-    width: 35px
+    width: 35px;
+    border-radius: 50%;
 }
 
 .settings-icon:hover,

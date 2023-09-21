@@ -1,11 +1,11 @@
 /* variables to style shop units based on their tier and interface */
 :root {
-    --tier-1: #bbbbbbbf;
+    --tier-1: #bbbbbb;
     --tier-2: #14cc73;
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
-    --interface: rgb(0, 41, 79);
+    --interface: #00294f;
 }
 
 body {
@@ -151,4 +151,5 @@ button {
     flex-direction: column;
     position: absolute;
     bottom: 10px;
+    /* width: 70vw; */
 }
