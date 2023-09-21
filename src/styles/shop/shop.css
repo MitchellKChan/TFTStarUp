@@ -40,6 +40,7 @@
     width: 11.2vw;
     margin: 5px;
     border: 3px solid;
+    font-size: 1rem;
 }
 
 .empty-shop-slot {
@@ -48,13 +49,12 @@
 
 .shop-unit img {
     width: 11vw;
-    height: 6vw;
+    /* height: 6vw; */
     border: 1px solid #000000;
 }
 
 .shop-unit-name {
     background-color: inherit;
-    /* height: auto; */
 }
 
 .tier-1 {

@@ -27,6 +27,13 @@ const modal = document.querySelector(".modal");
 
 // declare object for the settings form in the modal
 const form = document.querySelector(".settings-form");
+const slider = document.querySelector("#slider");
+const seconds = document.querySelector("#seconds");
+seconds.innerText = slider.value;
+
+// add event listener to seconds element to display real-time selected starting
+// time in form
+slider.addEventListener("input", e => seconds.innerText = e.target.value);
 
 // declare a Shop object for tracking level, gold, tier odds, and shop units
 const shop = new Shop(3, 0, 6, units, handleBuyUnit);

@@ -14,7 +14,7 @@
         <div class="modal">
             <div class="modal-content">
                 <div class="welcome">
-                    <p>Welcome to TFT StarUp!</p>
+                    <p class="welcome-title">Welcome to TFT StarUp!</p>
                     <br>
                     <p>Instructions</p>
                     <br>
@@ -29,9 +29,15 @@
                     </p>
                     <br>
                     <form class="settings-form">
-                        <label>
-                            <input type="range" name="timer" id="">
+                        <label for="slider">Starting Time (<output id="seconds"></output> seconds)
+                            <br>
+                            <br>
+                            30
+                            <input type="range" name="slider" id="slider" value="30" min="30" max="60" step="1">
+                            60
                         </label>
+                        <br>
+                        <br>
                         <button type="submit">Start Rolldown</button>
                     </form>
                 </div>

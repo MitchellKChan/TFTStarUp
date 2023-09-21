@@ -13,10 +13,10 @@ class Bench {
     buyUnit(unitName) {
         let slotIndex = 0;
         while (slotIndex < 9 && this.benchEl.children[slotIndex].children.length != 0) slotIndex++;
+        unitName = this.#imageNameReformat(unitName);
+        const slotKey = `slot${slotIndex + 1}`;
+        const oneStarKey = `${unitName}1`;
         if (slotIndex < 9) {
-            unitName = this.#imageNameReformat(unitName);
-            const slotKey = `slot${slotIndex + 1}`;
-            const oneStarKey = `${unitName}1`;
             let slot;
             if (!this.#hasCopy(oneStarKey)) {
                 // create index array for the unit at a one-star in units object
@@ -26,11 +26,12 @@ class Bench {
                 this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
             } else {
                 if (this.#canStarUp(oneStarKey)) {
-                    this.#addTwoStarUnit(unitName, oneStarKey);
-                    const twoStarKey = `${unitName}2`;
-                    if (this.#canThreeStar(twoStarKey)) {
-                        this.#addThreeStarUnit(unitName, twoStarKey);
-                    }
+                    this.#starUpUnit(unitName, oneStarKey);
+                    // this.#addTwoStarUnit(unitName, oneStarKey);
+                    // const twoStarKey = `${unitName}2`;
+                    // if (this.#canThreeStar(twoStarKey)) {
+                    //     this.#addThreeStarUnit(unitName, twoStarKey);
+                    // }
                 } else {
                     // add index to unit's index array in units object
                     this.units[oneStarKey].push(slotIndex);
@@ -43,7 +44,12 @@ class Bench {
         } else {
             // specific scenario where the bench is full but has two copies of the unit being
             // bought; the unit being bought is allowed to 
-            console.log("bench is full, need to sell units to buy more");
+            if (this.#canStarUp(oneStarKey)) {
+                this.#starUpUnit(unitName, oneStarKey);
+                return true;
+            } else {
+                console.log("bench is full, need to sell units to buy more");
+            }
         }
         return false;
     }
@@ -144,7 +150,9 @@ class Bench {
     }
 
     #canStarUp(unitKey) {
-        return this.units[unitKey].length === 2;
+        if (Object.keys(this.units).includes(unitKey)) return this.units[unitKey].length === 2;
+        return false;
+        
     }
 
     #canThreeStar(unitKey) {
@@ -191,6 +199,14 @@ class Bench {
         slot.classList.remove("one-star", "two-star");
         slot.classList.add("three-star");
         this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
+    }
+
+    #starUpUnit(unitName, oneStarKey) {
+        this.#addTwoStarUnit(unitName, oneStarKey);
+        const twoStarKey = `${unitName}2`;
+        if (this.#canThreeStar(twoStarKey)) {
+            this.#addThreeStarUnit(unitName, twoStarKey);
+        }
     }
 }
 

@@ -22,7 +22,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 0% 90%;
-    background-size: 110vw;
+    background-size: cover;
 }
 
 /* modal background; displayed when page is newly loaded */
@@ -49,6 +49,17 @@ body {
     padding: 25px;
     border: 5px solid #888888;
     width: 60%;
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
 }
 
 /* following classes are for testing wireframe placement on the page;
