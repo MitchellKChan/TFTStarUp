@@ -244,7 +244,7 @@ function handleOpenModal(event) {
   modal.classList.remove("hidden");
   modal.children[0].classList.remove("hidden");
   message.classList.add("hidden");
-  message.innerText = " ";
+  messageText.innerText = " ";
   restart.classList.add("hidden");
   clearInterval(time);
 }
