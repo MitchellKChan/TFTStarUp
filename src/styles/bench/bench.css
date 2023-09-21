@@ -1,5 +1,5 @@
 .bench {
-    height: 7vw;
+    height: 7.4vw;
     display: flex;
     justify-content: space-evenly;
 }
@@ -25,8 +25,7 @@
 }
 
 .two-star {
-    border-color: #c0c0c0;
-    filter: sepia(15%);
+    border-color: #000000;
 }
 
 .three-star {

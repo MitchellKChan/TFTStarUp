@@ -75,6 +75,11 @@ const levelInfo = document.createElement("div");
 const shopButtons = document.createElement("div");
 const shopInterface = document.createElement("div");
 
+// declare objects for social links
+const githubLink = document.createElement("a");
+const githubIcon = document.createElement("img");
+const linkedLink = document.createElement("a");
+const linkedIcon = document.createElement("img");
 
 // set inner text and classess for top section objects
 // title.innerText = "TFT Star Up";
@@ -83,7 +88,18 @@ const shopInterface = document.createElement("div");
 timer.innerText = slider.value;
 timer.classList.add("timer", "section");
 
-navLinks.innerText = "navLinks";
+
+githubLink.href = "https://github.com/MitchellKChan/TFTStarUp";
+githubIcon.src = "src/styles/gitHub-mark.png";
+githubIcon.classList.add("social");
+githubLink.append(githubIcon);
+
+linkedLink.href = "https://www.linkedin.com/in/mitchellkchan/";
+linkedIcon.src = "src/styles/linkedin_logo.png";
+linkedIcon.classList.add("social");
+linkedLink.append(linkedIcon);
+navLinks.append(githubLink, linkedLink);
+
 
 settingsIcon.src = "src/styles/gear.png";
 settingsIcon.classList.add("settings-icon");
@@ -91,7 +107,7 @@ settingsIcon.classList.add("settings-icon");
 settings.append(settingsIcon);
 settings.classList.add("settings");
 
-topRight.append(navLinks, settings);
+topRight.append(githubLink, linkedLink, settingsIcon);
 topRight.classList.add("top-right");
 
 topSection.classList.add("top");

@@ -1,12 +1,13 @@
-.settings {
-    text-align: right;
-}
-
 .settings-icon {
-    width: 30px;
+    width: 40px;
     border-radius: 50%;
 }
 
-.settings-icon:hover {
+.social {
+    width: 35px
+}
+
+.settings-icon:hover,
+.social:hover {
     background: radial-gradient(rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0));
 }
