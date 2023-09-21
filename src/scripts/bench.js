@@ -101,17 +101,20 @@ class Bench {
         this.benchEl.replaceChild(emptySlot, this.benchEl.children[slotIndex]);        
     }
 
-    reset() {
+    reset(modal, messageModal, messageText) {
         this.slots = this.#emptyBench();
         this.benchEl = this.#generateBench(this.slots);
         this.units = {}; 
+        this.modal = modal;
+        this.messageModal = messageModal;
+        this.messageText = messageText;
     }
 
     // private function only invoked by constructor
     #generateBench(benchSlots = {}) {
         if (Object.keys(benchSlots).length != 9) benchSlots = this.#emptyBench();
         const bench = document.createElement("div");
-        bench.classList.add("bench", "section");
+        bench.classList.add("bench");
         Object.entries(benchSlots).forEach(([slotKey, slotValue]) => {
             bench.append(this.#generateSlot(slotKey, slotValue));
         });

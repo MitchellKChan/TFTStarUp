@@ -59,7 +59,7 @@ table {
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
-    --interface: #00294f;
+    --interface: rgb(0, 41, 79);
 }
 
 body {
@@ -116,7 +116,7 @@ body {
 /* styling for message modal */
 .message-modal {
     background-color: #fefefe;
-    margin: 40% auto;
+    margin: 30% auto;
     padding: 5px;
     border: 1px solid #888888;
     width: 40%;
@@ -146,11 +146,8 @@ body {
     display: none;
 }
 
-/* following classes are for testing wireframe placement on the page;
-will not be part of prod */
 .section {
-    border: 1px solid #000000;
-    font-size: 1em;
+    border: 1px solid #a97900;
 }
 
 .top {
@@ -193,6 +190,12 @@ will not be part of prod */
 .shop-level-info {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    height: 30px;
+}
+
+.shop-level-info div {
+    width: 200px;
 }
 
 .shop-interface {
@@ -204,18 +207,27 @@ will not be part of prod */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    width: 100px;
+}
+
+.shop-buttons button {
+    height: 40px;
+    margin: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 .exp-button:hover {
     background-color: #add8e6;
+    color: #000000;
 }
 
 .refresh-button:hover {
     background-color: #90ee90;
+    color: #000000;
 }
 
 .shop-units {
-    height: 8vw;
     display: flex;
     justify-content: space-evenly;
 }
@@ -224,11 +236,11 @@ will not be part of prod */
     width: 11.2vw;
     margin: 5px;
     border: 3px solid;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .empty-shop-slot {
-    border-color: #000000;
+    border: 1px solid #a97900;
 }
 
 .shop-unit img {
@@ -239,6 +251,7 @@ will not be part of prod */
 
 .shop-unit-name {
     background-color: inherit;
+    color: #000000;
 }
 
 .tier-1 {
@@ -302,6 +315,9 @@ will not be part of prod */
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 40px;
+    background-color: var(--interface);
+    color: #ffffff;
 }
 /*!****************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/settings/settings.css ***!

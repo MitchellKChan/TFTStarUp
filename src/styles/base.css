@@ -5,7 +5,7 @@
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
-    --interface: #00294f;
+    --interface: rgb(0, 41, 79);
 }
 
 body {
@@ -62,7 +62,7 @@ body {
 /* styling for message modal */
 .message-modal {
     background-color: #fefefe;
-    margin: 40% auto;
+    margin: 30% auto;
     padding: 5px;
     border: 1px solid #888888;
     width: 40%;
@@ -92,11 +92,8 @@ body {
     display: none;
 }
 
-/* following classes are for testing wireframe placement on the page;
-will not be part of prod */
 .section {
-    border: 1px solid #000000;
-    font-size: 1em;
+    border: 1px solid #a97900;
 }
 
 .top {

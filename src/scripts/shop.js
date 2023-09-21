@@ -42,7 +42,7 @@ class Shop {
 
     generateShopUnits(shopSlots = {}) {
         const shopUnits = document.createElement("div");
-        shopUnits.classList.add("section", "shop-units");
+        shopUnits.classList.add("shop-units");
         Object.entries(shopSlots).forEach(([slotKey, slot] )=> {
             const slotEl = this.#generateSlot(slotKey, slot);
             shopUnits.append(slotEl);

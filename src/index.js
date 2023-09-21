@@ -77,8 +77,8 @@ const shopInterface = document.createElement("div");
 
 
 // set inner text and classess for top section objects
-title.innerText = "TFT Star Up";
-title.classList.add("title", "section");
+// title.innerText = "TFT Star Up";
+// title.classList.add("title", "section");
 
 timer.innerText = slider.value;
 timer.classList.add("timer", "section");
@@ -92,29 +92,26 @@ settings.append(settingsIcon);
 settings.classList.add("settings");
 
 topRight.append(navLinks, settings);
-topRight.classList.add("top-right", "section",);
+topRight.classList.add("top-right");
 
 topSection.classList.add("top");
 topSection.append(title, timer, topRight);
 
 // set inner text and classess for bottom section objects
-shopEl.classList.add("shop", "section");
+shopEl.classList.add("shop");
 
 bottomSection.classList.add("bottom");
 bottomSection.append(bench.benchEl, shopEl);
 
 // set inner text and clases for shop objects
-level.innerText = shop.level;
-level.classList.add("section");
+level.innerText = `Lvl. ${shop.level}`;
 
-// odds.innerText = `${Shop.tierOdds[shop.level]}`;
 Shop.generateTierEls(odds, shop.level);
 odds.classList.add("odds");
 
-levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
-levelProgress.classList.add("section");
+levelProgress.innerText = `Exp to Next Level: ${shop.currentEpx}/${shop.expToNextLevel}`;
 
-levelInfo.classList.add("section", "shop-level-info")
+levelInfo.classList.add("shop-level-info")
 levelInfo.append(level, levelProgress, odds);
 
 
@@ -239,13 +236,13 @@ function handleOpenModal(event) {
 // function to handle events that trigger starting the app
 function handleStartApp(event) {
   event.preventDefault();
-  modal.classList.toggle("hidden");
-  bench.reset();
+  modal.classList.add("hidden");
+  bench.reset(modal, message, messageText);
   bottomSection.replaceChild(bench.benchEl, bottomSection.children[0]);
   shop.reset();
-  level.innerText = shop.level;
+  level.innerText = `Lvl. ${shop.level}`;
   Shop.generateTierEls(odds, shop.level);
-  levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
+  levelProgress.innerText = `Exp to Next Level: ${shop.currentEpx}/${shop.expToNextLevel}`;
   startRolldown();
 }
 
@@ -268,6 +265,7 @@ function startRolldown() {
   time = setInterval(() => {
     if (timer.innerText > 0) {
       timer.innerText = Number(timer.innerText) - 1;
+      console.log(messageText.innerText);
     } else {
       stopRolldown();
     }
