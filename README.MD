@@ -24,7 +24,7 @@ user interaction will focus exclusively on the game aspects integral to
 rolling down: the **shop** and **unit bench**.  In the tool, users will be 
 able to:
 
-- Configure settings for their rolldown, such as the timer and starting level
+- Configure settings for their rolldown, such as the timer
 - Make shop purchases by either clicking on a unit or by dragging it
 outside of the shop, which then appear on an empty bench slot
 - Upgrade a bench unit's star level (**"star up"** a unit) when a third copy
