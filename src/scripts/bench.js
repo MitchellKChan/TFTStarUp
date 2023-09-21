@@ -1,13 +1,16 @@
 const dataDragonUrl = "https://ddragon.leagueoflegends.com/cdn/";
 
 class Bench {
-    constructor() {
+    constructor(modal, messageModal, messageText) {
         this.slots = this.#emptyBench(); // units currently on the bench
         this.benchEl = this.#generateBench(this.slots); // bench element in DOM
         // units' slot indices organized by unit star level
-        // key: unit name plus star level suffix (1,2,3); e.g., "Graves1" != "Graves2"
-        // value: array of slot indices; key is deleted if array is empty
+        // - key: unit name plus star level suffix (1,2,3); e.g., "Graves1" != "Graves2"
+        // - value: array of slot indices; key is deleted if array is empty
         this.units = {}; 
+        this.modal = modal;
+        this.messageModal = messageModal;
+        this.messageText = messageText;
     }
 
     buyUnit(unitName) {
@@ -27,11 +30,6 @@ class Bench {
             } else {
                 if (this.#canStarUp(oneStarKey)) {
                     this.#starUpUnit(unitName, oneStarKey);
-                    // this.#addTwoStarUnit(unitName, oneStarKey);
-                    // const twoStarKey = `${unitName}2`;
-                    // if (this.#canThreeStar(twoStarKey)) {
-                    //     this.#addThreeStarUnit(unitName, twoStarKey);
-                    // }
                 } else {
                     // add index to unit's index array in units object
                     this.units[oneStarKey].push(slotIndex);
@@ -48,7 +46,18 @@ class Bench {
                 this.#starUpUnit(unitName, oneStarKey);
                 return true;
             } else {
-                console.log("bench is full, need to sell units to buy more");
+                this.modal.classList.remove("hidden");
+                this.modal.children[0].classList.add("hidden");
+                this.messageModal.classList.remove("hidden");
+                this.messageModal.classList.toggle("error");
+                this.messageText.innerText = "The bench is full.  Sell units to free up bench space.";
+                let error = setInterval(() => {
+                    this.modal.classList.add("hidden");
+                    this.messageModal.classList.add("hidden");
+                    this.messageText.innerText = "";
+                    this.messageModal.classList.toggle("error");
+                    clearInterval(error);
+                }, 1000);
             }
         }
         return false;
@@ -90,6 +99,12 @@ class Bench {
         // generate empty slot element and replace the previous one at slotIndex in this.benchEl
         const emptySlot = this.#generateSlot(slotKey, "empty");
         this.benchEl.replaceChild(emptySlot, this.benchEl.children[slotIndex]);        
+    }
+
+    reset() {
+        this.slots = this.#emptyBench();
+        this.benchEl = this.#generateBench(this.slots);
+        this.units = {}; 
     }
 
     // private function only invoked by constructor

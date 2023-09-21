@@ -92,9 +92,6 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-.hidden {
-    display: none;
-}
 
 /* modal content; shows the welcome messsage and application instructions */
 .modal-content {
@@ -116,8 +113,41 @@ body {
     flex-direction: column;
 }
 
+/* styling for message modal */
+.message-modal {
+    background-color: #fefefe;
+    margin: 40% auto;
+    padding: 5px;
+    border: 1px solid #888888;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message {
+    text-align: center;
+}
+
+.restart {
+    margin-top: 10px;
+}
+
+.error {
+    background-color: #f3c4c4;
+    border-color: rgb(198, 0, 0);
+}
+
+.error p {
+    color: rgb(198, 0, 0);
+}
+
+.hidden {
+    display: none;
+}
+
 /* following classes are for testing wireframe placement on the page;
-    will not be part of prod */
+will not be part of prod */
 .section {
     border: 1px solid #000000;
     font-size: 1em;
@@ -287,7 +317,6 @@ body {
 
 .settings-icon:hover {
     background: radial-gradient(rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0));
-    /* background: rgba(255, 255, 255, 0); */
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/bench/bench.css ***!

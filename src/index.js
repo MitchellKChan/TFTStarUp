@@ -1,4 +1,3 @@
-import Modal from "./scripts/util/modal";
 import Units from "./scripts/units";
 import Shop from "./scripts/shop";
 import Bench from "./scripts/bench";
@@ -25,6 +24,11 @@ body.style.backgroundImage = "url(src/styles/pageBackground.jpeg)";
 // declare object for the modal
 const modal = document.querySelector(".modal");
 
+// declare object for the message element
+const message = document.querySelector(".message-modal");
+const messageText = document.querySelector(".message");
+const restart = document.querySelector(".restart");
+
 // declare object for the settings form in the modal
 const form = document.querySelector(".settings-form");
 const slider = document.querySelector("#slider");
@@ -39,10 +43,10 @@ slider.addEventListener("input", e => {
 });
 
 // declare a Shop object for tracking level, gold, tier odds, and shop units
-const shop = new Shop(3, 0, 6, units, handleBuyUnit);
+let shop = new Shop(3, 0, 6, units, handleBuyUnit);
 
 // declare a Bench object for tracking units that have been purchased
-const bench = new Bench();
+let bench = new Bench(modal, message, messageText);
 
 // declare objects for the top section, which contains the title, timer,
 // nav links, and settings
@@ -65,7 +69,6 @@ const bottomSection = document.createElement("div");
 const level = document.createElement("div");
 const odds = document.createElement("div");
 const levelProgress = document.createElement("div");
-const gold = document.createElement("div");;
 const expButton = document.createElement("button");
 const refreshButton = document.createElement("button");
 const levelInfo = document.createElement("div");
@@ -111,11 +114,8 @@ odds.classList.add("odds");
 levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
 levelProgress.classList.add("section");
 
-gold.innerText = "gold";
-gold.classList.add("section");
-
 levelInfo.classList.add("section", "shop-level-info")
-levelInfo.append(level, levelProgress, odds, gold);
+levelInfo.append(level, levelProgress, odds);
 
 
 expButton.innerText = "Buy XP";
@@ -166,6 +166,11 @@ form.addEventListener("submit", e => {
   handleStartApp(e);
 });
 
+// add event listener to restart button to reopen the welcome modal
+restart.addEventListener("click", e => {
+  handleOpenModal(e);
+});
+
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
   event.preventDefault();
@@ -182,7 +187,6 @@ function handleBuyExp(event) {
     levelProgress.innerText = shop.expToNextLevel;
   }
   level.innerText = shop.level;
-  // odds.innerText = Shop.tierOdds[shop.level];
   Shop.generateTierEls(odds, shop.level);
 }
 
@@ -221,14 +225,27 @@ function handleSellUnit(event) {
 // function to handle events that trigger opening the modal
 function handleOpenModal(event) {
   event.preventDefault();
-  modal.classList.toggle("hidden");
-  stopRolldown();
+  body.removeEventListener("keydown", refreshHotkey);
+  body.removeEventListener("keydown", buyExpHotkey);
+  timer.innerText = slider.value;
+  modal.classList.remove("hidden");
+  modal.children[0].classList.remove("hidden");
+  message.classList.add("hidden");
+  message.innerText = "";
+  restart.classList.add("hidden");
+  clearInterval(time);
 }
 
 // function to handle events that trigger starting the app
 function handleStartApp(event) {
   event.preventDefault();
   modal.classList.toggle("hidden");
+  bench.reset();
+  bottomSection.replaceChild(bench.benchEl, bottomSection.children[0]);
+  shop.reset();
+  level.innerText = shop.level;
+  Shop.generateTierEls(odds, shop.level);
+  levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
   startRolldown();
 }
 
@@ -240,6 +257,7 @@ function buyExpHotkey(event) {
   if (event.code === "KeyF") handleBuyExp(event);
 }
 
+// initialize time variable to count down seconds once a rolldown starts
 let time;
 
 // function to begin timer countdown
@@ -259,10 +277,14 @@ function startRolldown() {
 // function to end timer countdown
 function stopRolldown() {
   // disable hot keys for shop refreshes and buying experience
+  clearInterval(time);
   body.removeEventListener("keydown", refreshHotkey);
   body.removeEventListener("keydown", buyExpHotkey);
-  modal.classList.toggle("hidden");
-  clearInterval(time);
+  modal.classList.remove("hidden");
+  modal.children[0].classList.add("hidden");
+  message.classList.remove("hidden", "error");
+  messageText.innerText = "Thanks for rolling down!  To start another, click the button below.";
+  restart.classList.remove("hidden");
 }
 
 body.append(topSection, bottomSection);

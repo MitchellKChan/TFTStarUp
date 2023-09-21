@@ -5,7 +5,7 @@ class Shop {
         this.expToNextLevel = expToNextLevel;
         this.units = units;
         this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]); // an array of unit info objects
-        this.slots = this.#emptyShop();
+        this.slots = this.emptyShop();
         this.handleBuyUnit = handleBuyUnit; // event function to pass bought unit to bench
         this.shopUnitsEl = this.generateShopUnits(this.slots);
     }
@@ -52,8 +52,16 @@ class Shop {
         return shopUnits;
     }
 
-    // private function invoked by the constructor
-    #emptyShop() {
+    reset() {
+        this.level = 3;
+        this.currentEpx = 0;
+        this.expToNextLevel = 6;
+        this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]);
+        this.slots = this.emptyShop();
+        this.refresh();
+    }
+
+    emptyShop() {
         const slots = {};
         for (let i = 1; i <= 5 ; i++) {
             slots[`slot${i}`] = "empty";
