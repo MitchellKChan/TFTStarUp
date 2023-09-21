@@ -135,24 +135,15 @@ settingsIcon.addEventListener("click", e => {
   handleOpenModal(e);
 });
 
-// add event listeners for shop refreshes
+// add event listener to button for shop refreshes
 refreshButton.addEventListener("click", e => {
   handleRefresh(e);
 });
 
-body.addEventListener("keydown", e => {
-  if (e.code === "KeyD") handleRefresh(e);
-});
-
-// add event listeners for buying experience
+// add event listener to button for buying experience
 expButton.addEventListener("click", e => {
   handleBuyExp(e);
 });
-
-body.addEventListener("keydown", e => {
-  if (e.code === "KeyF") handleBuyExp(e);
-});
-
 
 // add event listener to document to track mouse position for
 // for selling bench units
@@ -174,7 +165,6 @@ form.addEventListener("submit", e => {
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
   event.preventDefault();
-  // generate a new shopUnits div to replace the current one
   shop.refresh();
 }
 
@@ -227,12 +217,35 @@ function handleSellUnit(event) {
 function handleOpenModal(event) {
   event.preventDefault();
   modal.classList.toggle("hidden");
+  stopRolldown();
 }
 
 // function to handle events that trigger starting the app
 function handleStartApp(event) {
   event.preventDefault();
   modal.classList.toggle("hidden");
+  startRolldown();
+}
+
+function refreshHotkey(event) {
+  if (event.code === "KeyD") handleRefresh(event);
+}
+
+function buyExpHotkey(event) {
+  if (event.code === "KeyF") handleBuyExp(event);
+}
+// function to begin timer countdown
+function startRolldown() {
+  // enable hot keys for shop refreshes and buying experience
+  body.addEventListener("keydown", refreshHotkey);
+  body.addEventListener("keydown", buyExpHotkey);
+}
+
+// function to end timer countdown
+function stopRolldown() {
+  // disable hot keys for shop refreshes and buying experience
+  body.removeEventListener("keydown", refreshHotkey);
+  body.removeEventListener("keydown", buyExpHotkey);
 }
 
 body.append(topSection, bottomSection);
