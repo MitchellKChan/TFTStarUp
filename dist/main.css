@@ -54,7 +54,7 @@ table {
   \***************************************************************************************************/
 /* variables to style shop units based on their tier and interface */
 :root {
-    --tier-1: #bbbbbb36;
+    --tier-1: #bbbbbbbf;
     --tier-2: #14cc73;
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
@@ -233,7 +233,37 @@ body {
 
 .tier-5 {
     border-color: var(--tier-5);
-    background-color: var(--tier-3);
+    background-color: var(--tier-5);
+}
+
+.odds{
+    display: flex;
+    /* background-color: rgba(0, 41, 79, 1.0); */
+    /* background-color: rgba(255, 255, 255, 0.3); */
+}
+
+.odds p {
+    margin: 0 5px;
+}
+
+.tier-1-odd {
+    color: var(--tier-1);
+}
+
+.tier-2-odd {
+    color: var(--tier-2);
+}
+
+.tier-3-odd {
+    color: var(--tier-3);
+}
+
+.tier-4-odd {
+    color: var(--tier-4);
+}
+
+.tier-5-odd {
+    color: var(--tier-5);
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/timer/timer.css ***!

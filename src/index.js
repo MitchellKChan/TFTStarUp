@@ -101,8 +101,9 @@ bottomSection.append(bench.benchEl, shopEl);
 level.innerText = shop.level;
 level.classList.add("section");
 
-odds.innerText = `${Shop.tierOdds[shop.level]}`;
-odds.classList.add("section");
+// odds.innerText = `${Shop.tierOdds[shop.level]}`;
+Shop.generateTierEls(odds, shop.level);
+odds.classList.add("odds");
 
 levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
 levelProgress.classList.add("section");
@@ -178,7 +179,8 @@ function handleBuyExp(event) {
     levelProgress.innerText = shop.expToNextLevel;
   }
   level.innerText = shop.level;
-  odds.innerText = Shop.tierOdds[shop.level];
+  // odds.innerText = Shop.tierOdds[shop.level];
+  Shop.generateTierEls(odds, shop.level);
 }
 
 // function to handle events that trigger unit purchases; event

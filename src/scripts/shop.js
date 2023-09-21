@@ -96,6 +96,21 @@ Shop.tierOdds = {
     9: [0.09, 0.15, 0.30, 0.30, 0.16],
 }
 
+Shop.generateTierEls = function(parentEl, level) {
+    if (parentEl.children.length === 0) {
+        Shop.tierOdds[level].forEach((odd, i) => {
+            const tierEl = document.createElement("p");
+            tierEl.classList.add(`tier-${i + 1}-odd`);
+            tierEl.innerText =`${(odd * 100).toFixed(0)}%`;
+            parentEl.append(tierEl);
+        });
+    } else {
+        Shop.tierOdds[level].forEach((odd, i) => {
+            parentEl.children[i].innerText = `${(odd * 100).toFixed(0)}%`;
+        });
+    }
+}
+
 Shop.levelExp = {
     2: 2,
     3: 6,
