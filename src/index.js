@@ -90,7 +90,7 @@ timer.classList.add("timer", "section");
 
 
 githubLink.href = "https://github.com/MitchellKChan/TFTStarUp";
-githubIcon.src = "src/styles/gitHub-mark.png";
+githubIcon.src = "src/styles/github-mark.png";
 githubIcon.classList.add("social");
 githubLink.append(githubIcon);
 

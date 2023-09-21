@@ -95,11 +95,12 @@ body {
 
 /* modal content; shows the welcome messsage and application instructions */
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--interface);
     margin: 12% auto;
     padding: 25px;
-    border: 5px solid #888888;
+    border: 3px solid #a97900;
     width: 60%;
+    color: #ffffff;
 }
 
 .welcome {
@@ -115,14 +116,15 @@ body {
 
 /* styling for message modal */
 .message-modal {
-    background-color: #fefefe;
+    background-color: var(--interface);
     margin: 30% auto;
     padding: 5px;
-    border: 1px solid #888888;
+    border: 5px solid #a97900;
     width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #ffffff;
 }
 
 .message {
@@ -140,6 +142,11 @@ body {
 
 .error p {
     color: rgb(198, 0, 0);
+}
+
+button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
 }
 
 .hidden {
@@ -347,6 +354,7 @@ body {
 
 .slot {
     width: 6vw;
+    height: 6vw;
     margin: 7px;
     border: 5px solid;
 }
