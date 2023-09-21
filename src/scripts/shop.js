@@ -5,15 +5,9 @@ class Shop {
         this.expToNextLevel = expToNextLevel;
         this.units = units;
         this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]); // an array of unit info objects
-        this.slots = {
-            slot1: "slot 1",
-            slot2: "slot 2",
-            slot3: "slot 3",
-            slot4: "slot 4",
-            slot5: "slot 5"
-        };
+        this.slots = this.#emptyShop();
         this.handleBuyUnit = handleBuyUnit; // event function to pass bought unit to bench
-        // this.shopEl = this.generateShopUnits();
+        this.shopUnitsEl = this.generateShopUnits(this.slots);
     }
 
     buyExp() {
@@ -30,31 +24,63 @@ class Shop {
         this.unitPool = this.units.unitPool(Shop.tierOdds[this.level]);
     }
 
+    buyUnit(slotIndex) {
+        // free up the slot in this.slots at slotIndex
+        const slotKey = `slot${slotIndex + 1}`;
+        this.slots[slotKey] = "empty";
+        const emptySlot = this.#generateSlot(slotKey, "empty");
+        this.shopUnitsEl.replaceChild(emptySlot, this.shopUnitsEl.children[slotIndex]);
+    }
+
     refresh() {
-        Object.keys(this.slots).map(key => {
+        Object.keys(this.slots).forEach((key, i)=> {
             this.slots[key] = this.units.randomUnit(this.unitPool, Shop.tierOdds[this.level]);
+            const newUnit = this.#generateSlot(key, this.slots[key]);
+            this.shopUnitsEl.replaceChild(newUnit, this.shopUnitsEl.children[i]);
         });
     }
 
-    generateShopUnits() {
+    generateShopUnits(shopSlots = {}) {
         const shopUnits = document.createElement("div");
         shopUnits.classList.add("section", "shop-units");
-        Object.values(this.slots).forEach(slot => {
-            const slotEl = document.createElement("div");
-            const icon = document.createElement("img");
-            const name = document.createElement("div");
-            icon.src = this.units.shopUnitImage(slot);
-            name.innerText = slot.name;
-            name.classList.add("shop-unit-name");
-            slotEl.append(icon, name);
-            slotEl.classList.add("section", "shop-unit", `tier-${slot.tier}`);
-            // add unit name as data attribute for populating bench spaces with correct unit icon
-            for (const child of slotEl.children) child.dataset.unitName = slot.name;
+        Object.entries(shopSlots).forEach(([slotKey, slot] )=> {
+            const slotEl = this.#generateSlot(slotKey, slot);
             shopUnits.append(slotEl);
         });
         // add event listener for buying units 
         shopUnits.addEventListener("click", e => this.handleBuyUnit(e));
         return shopUnits;
+    }
+
+    // private function invoked by the constructor
+    #emptyShop() {
+        const slots = {};
+        for (let i = 1; i <= 5 ; i++) {
+            slots[`slot${i}`] = "empty";
+        }
+        return slots;
+    }
+
+    #generateSlot(slotKey, unit = "empty") {
+        const slotEl = document.createElement("div");
+        if (unit === "empty") {
+            this.slots[slotKey] = "empty";
+            slotEl.classList.add("empty", "shop-unit", "empty-shop-slot");
+        } else {
+            const icon = document.createElement("img");
+            const name = document.createElement("div");
+            icon.src = this.units.shopUnitImage(unit);
+            name.innerText = unit.name;
+            name.classList.add("shop-unit-name");
+            slotEl.append(icon, name);
+            slotEl.classList.add("section", "shop-unit", `tier-${unit.tier}`);
+            // add unit name as data attribute for populating bench spaces with correct unit icon
+            for (const child of slotEl.children) {
+                child.dataset.unitName = unit.name;
+                child.dataset.slotKey = slotKey;
+            }
+        }
+        return slotEl;
     }
 }
 

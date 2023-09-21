@@ -1,11 +1,12 @@
 .bench {
-    height: 6vw;
+    height: 7vw;
     display: flex;
     justify-content: space-evenly;
 }
 
 .slot {
     width: 6vw;
+    margin: 7px;
     border: 5px solid;
 }
 
@@ -13,19 +14,22 @@
     width: inherit;
 }
 
-.empty {
+.empty-bench-slot {
     /* 0.0 opacity for a "transparent border" when a slot has no unit */
     border-color: rgba(255, 255, 255, 0.0);
 }
 
 .one-star {
-    border-color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.0);
+    filter: brightness(90%);
 }
 
 .two-star {
     border-color: #c0c0c0;
+    filter: sepia(15%);
 }
 
 .three-star {
-    border-color: #ffd700;
+    border-color: #ffbb00;
+    filter: brightness(120%);
 }

@@ -39,9 +39,13 @@ class Bench {
                     this.benchEl.replaceChild(slot, this.benchEl.children[slotIndex]);
                 }
             }
+            return true;
         } else {
+            // specific scenario where the bench is full but has two copies of the unit being
+            // bought; the unit being bought is allowed to 
             console.log("bench is full, need to sell units to buy more");
         }
+        return false;
     }
     
     benchUnitImage(unitName) {
@@ -95,22 +99,23 @@ class Bench {
 
     // private function invoked by buyUnit, removeUnit, and #generateBench
     #generateSlot(slotKey, unitName) {
-        const slot = document.createElement("div");
-        slot.classList.add("slot");
+        const slotEl = document.createElement("div");
+        slotEl.classList.add("slot");
         if (unitName === "empty") {
-            slot.classList.toggle("empty");
+            slotEl.classList.toggle("empty-bench-slot");
         } else {
-            slot.classList.toggle("one-star");
+            slotEl.classList.toggle("one-star");
             const unitIcon = document.createElement("img");
             unitIcon.dataset.slotKey = slotKey;
             unitIcon.dataset.unitName = unitName;
+            unitIcon.dataset.onBench = "true";
             unitIcon.src = this.benchUnitImage(unitName);
-            slot.append(unitIcon);
+            slotEl.append(unitIcon);
         }
-        return slot;
+        return slotEl;
     }
 
-    // private function only invoked if no argument is passed to #generateBench
+    // private function invoked by the constructor or if no argument is passed to #generateBench
     #emptyBench() {
         const slots = {};
         for (let i = 1; i <= 9 ; i++) {
@@ -119,7 +124,7 @@ class Bench {
         return slots;
     }
 
-    // privatre function only invoked in buyUnit if unitName has an apostrophe
+    // private function only invoked in buyUnit if unitName has an apostrophe
     #imageNameReformat(unitName) {
         if (unitName.includes("'")) {
             // reformat Void unit names (character after apostrophe is lowercase)
@@ -183,8 +188,8 @@ class Bench {
         }
         this.slots[firstCopySlotKey] = threeStarKey;
         const slot = this.#generateSlot(firstCopySlotKey, unitName);
-        slot.classList.toggle("two-star");
-        slot.classList.toggle("three-star");
+        slot.classList.remove("one-star", "two-star");
+        slot.classList.add("three-star");
         this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
     }
 }

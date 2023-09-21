@@ -52,13 +52,14 @@ table {
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/base.css ***!
   \***************************************************************************************************/
-/* variables to style shop units based on their tier */
+/* variables to style shop units based on their tier and interface */
 :root {
     --tier-1: #bbbbbb36;
     --tier-2: #14cc73;
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
+    --interface: #00294f;
 }
 
 body {
@@ -134,7 +135,7 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
 }
 
 /*!********************************************************************************************************!*\
@@ -144,6 +145,8 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 2vw;
+    background-color: var(--interface);
+    color: #ffffff;
 }
 
 .shop-level-info {
@@ -171,43 +174,55 @@ body {
 }
 
 .shop-units {
+    height: 8vw;
     display: flex;
     justify-content: space-evenly;
 }
 
 .shop-unit {
-    width: 13vw;
-    border: 5px solid;
+    width: 11.2vw;
+    margin: 5px;
+    border: 3px solid;
+}
+
+.empty-shop-slot {
+    border-color: #000000;
 }
 
 .shop-unit img {
-    width: 13vw;
-    height: 7vw;
+    width: 11vw;
+    height: 6vw;
+    border: 1px solid #000000;
 }
 
-/* .shop-unit-name {
-    display: flex;
-    justify-content: right;
-} */
+.shop-unit-name {
+    background-color: inherit;
+    /* height: auto; */
+}
 
 .tier-1 {
     border-color: var(--tier-1);
+    background-color: var(--tier-1);
 }
 
 .tier-2 {
     border-color: var(--tier-2);
+    background-color: var(--tier-2);
 }
 
 .tier-3 {
     border-color: var(--tier-3);
+    background-color: var(--tier-3);
 }
 
 .tier-4 {
     border-color: var(--tier-4);
+    background-color: var(--tier-4);
 }
 
 .tier-5 {
     border-color: var(--tier-5);
+    background-color: var(--tier-3);
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/timer/timer.css ***!
@@ -230,20 +245,21 @@ body {
 }
 
 .settings-icon:hover {
-    background: radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    background: radial-gradient(rgba(255, 255, 255, 1.0), rgba(255, 255, 255, 0));
     /* background: rgba(255, 255, 255, 0); */
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/bench/bench.css ***!
   \**********************************************************************************************************/
 .bench {
-    height: 6vw;
+    height: 7vw;
     display: flex;
     justify-content: space-evenly;
 }
 
 .slot {
     width: 6vw;
+    margin: 7px;
     border: 5px solid;
 }
 
@@ -251,21 +267,24 @@ body {
     width: inherit;
 }
 
-.empty {
+.empty-bench-slot {
     /* 0.0 opacity for a "transparent border" when a slot has no unit */
     border-color: rgba(255, 255, 255, 0.0);
 }
 
 .one-star {
-    border-color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.0);
+    filter: brightness(90%);
 }
 
 .two-star {
     border-color: #c0c0c0;
+    filter: sepia(15%);
 }
 
 .three-star {
-    border-color: #ffd700;
+    border-color: #ffbb00;
+    filter: brightness(120%);
 }
 /*!**********************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./src/styles/title/title.css ***!

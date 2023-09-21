@@ -1,10 +1,11 @@
-/* variables to style shop units based on their tier */
+/* variables to style shop units based on their tier and interface */
 :root {
     --tier-1: #bbbbbb36;
     --tier-2: #14cc73;
     --tier-3: #54c3ff;
     --tier-4: #de0ebd;
     --tier-5: #ffc430;
+    --interface: #00294f;
 }
 
 body {
@@ -80,5 +81,5 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
 }

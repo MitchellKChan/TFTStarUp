@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     margin-top: 2vw;
+    background-color: var(--interface);
+    color: #ffffff;
 }
 
 .shop-level-info {
@@ -29,41 +31,53 @@
 }
 
 .shop-units {
+    height: 8vw;
     display: flex;
     justify-content: space-evenly;
 }
 
 .shop-unit {
-    width: 13vw;
-    border: 5px solid;
+    width: 11.2vw;
+    margin: 5px;
+    border: 3px solid;
+}
+
+.empty-shop-slot {
+    border-color: #000000;
 }
 
 .shop-unit img {
-    width: 13vw;
-    height: 7vw;
+    width: 11vw;
+    height: 6vw;
+    border: 1px solid #000000;
 }
 
-/* .shop-unit-name {
-    display: flex;
-    justify-content: right;
-} */
+.shop-unit-name {
+    background-color: inherit;
+    /* height: auto; */
+}
 
 .tier-1 {
     border-color: var(--tier-1);
+    background-color: var(--tier-1);
 }
 
 .tier-2 {
     border-color: var(--tier-2);
+    background-color: var(--tier-2);
 }
 
 .tier-3 {
     border-color: var(--tier-3);
+    background-color: var(--tier-3);
 }
 
 .tier-4 {
     border-color: var(--tier-4);
+    background-color: var(--tier-4);
 }
 
 .tier-5 {
     border-color: var(--tier-5);
+    background-color: var(--tier-3);
 }

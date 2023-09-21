@@ -107,19 +107,19 @@ levelInfo.classList.add("section", "shop-level-info")
 levelInfo.append(level, levelProgress, odds, gold);
 
 
-expButton.innerText = "exp-button";
+expButton.innerText = "Buy XP";
 expButton.classList.add("section", "exp-button");
 
-refreshButton.innerText = "refresh-button";
+refreshButton.innerText = "Refresh";
 refreshButton.classList.add("section", "refresh-button");
 
 shopButtons.classList.add("shop-buttons");
 shopButtons.append(expButton, refreshButton);
 
-shop.refresh();
+// shop.refresh();
 
 shopInterface.classList.add("shop-interface", "section");
-shopInterface.append(shopButtons, shop.generateShopUnits());
+shopInterface.append(shopButtons, shop.shopUnitsEl);
 
 shopEl.append(levelInfo, shopInterface);
 
@@ -167,9 +167,8 @@ form.addEventListener("submit", e => {
 // function to handle events that trigger shop refreshes
 function handleRefresh(event) {
   event.preventDefault();
-  shop.refresh();
   // generate a new shopUnits div to replace the current one
-  shopEl.children[1].replaceChild(shop.generateShopUnits(), shopEl.children[1].children[1]); 
+  shop.refresh();
 }
 
 // function to handle events that trigger buying experience
@@ -191,7 +190,13 @@ function handleBuyExp(event) {
 function handleBuyUnit(event) {
   event.preventDefault();
   const unitName = event.target.dataset.unitName;
-  if (unitName) bench.buyUnit(unitName);
+  const slotKey = event.target.dataset.slotKey;
+  if (unitName && slotKey) {
+    // unit to sell is at the position contained by the 4th index
+    // of the slotKey data attribute; slotkey = `slot${slotIndex}`
+    const slotIndex = Number(slotKey[4]) - 1;
+    if (bench.buyUnit(unitName)) shop.buyUnit(slotIndex);
+  };
 }
 
 // function to handle events that trigger selling of units
@@ -200,7 +205,10 @@ function handleSellUnit(event) {
   const hoverElement = document.elementFromPoint(window.mouse[0], window.mouse[1]);
   const unitName = hoverElement.dataset.unitName;
   const slotKey = hoverElement.dataset.slotKey;
-  if (unitName && slotKey) {
+  // shop units also have the above data addtributes, so the onBench 
+  // one is added to bench units prevent errors from trying to sell shop units
+  const onBench = hoverElement.dataset.onBench; 
+  if (unitName && slotKey && onBench === "true") {
     // unit to sell is at the position contained by the 4th index
     // of the slotKey data attribute; slotkey = `slot${slotIndex}`
     const slotIndex = Number(slotKey[4]) - 1;
