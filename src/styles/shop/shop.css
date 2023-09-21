@@ -14,8 +14,12 @@
     height: 30px;
 }
 
+.level-info {
+    text-align: center;
+}
+
 .shop-level-info div {
-    width: 200px;
+    width: 250px;
 }
 
 .shop-interface {
@@ -100,8 +104,6 @@
 
 .odds{
     display: flex;
-    /* background-color: rgba(0, 41, 79, 1.0); */
-    /* background-color: rgba(255, 255, 255, 0.3); */
 }
 
 .odds p {

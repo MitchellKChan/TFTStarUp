@@ -42,7 +42,7 @@ body {
 /* modal content; shows the welcome messsage and application instructions */
 .modal-content {
     background-color: var(--interface);
-    margin: 12% auto;
+    margin: 8% auto;
     padding: 25px;
     border: 3px solid #a97900;
     width: 60%;
@@ -55,6 +55,30 @@ body {
     align-items: center;
 }
 
+.welcome-title {
+    font-size: 2em;
+}
+
+.welcome p {
+    text-align: center;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.gray {
+    color: var(--tier-1);
+}
+
+.gold {
+    color: var(--tier-5);
+}
+
+.instructions {
+    font-size: 1.5em;
+}
+
 .settings-form {
     display: flex;
     flex-direction: column;
@@ -65,7 +89,7 @@ body {
     background-color: var(--interface);
     margin: 30% auto;
     padding: 5px;
-    border: 5px solid #a97900;
+    border: 3px solid #a97900;
     width: 40%;
     display: flex;
     flex-direction: column;

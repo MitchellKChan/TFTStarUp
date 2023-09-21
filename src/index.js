@@ -120,27 +120,27 @@ bottomSection.classList.add("bottom");
 bottomSection.append(bench.benchEl, shopEl);
 
 // set inner text and clases for shop objects
+level.classList.add("level-info");
 level.innerText = `Lvl. ${shop.level}`;
 
+odds.classList.add("odds", "level-info");
 Shop.generateTierEls(odds, shop.level);
-odds.classList.add("odds");
 
+levelProgress.classList.add("level-info");
 levelProgress.innerText = `Exp to Next Level: ${shop.currentEpx}/${shop.expToNextLevel}`;
 
 levelInfo.classList.add("shop-level-info")
 levelInfo.append(level, levelProgress, odds);
 
 
-expButton.innerText = "Buy XP";
+expButton.innerText = "Buy XP  [F]";
 expButton.classList.add("section", "exp-button");
 
-refreshButton.innerText = "Refresh";
+refreshButton.innerText = "Refresh  [D]";
 refreshButton.classList.add("section", "refresh-button");
 
 shopButtons.classList.add("shop-buttons");
 shopButtons.append(expButton, refreshButton);
-
-// shop.refresh();
 
 shopInterface.classList.add("shop-interface", "section");
 shopInterface.append(shopButtons, shop.shopUnitsEl);
@@ -195,11 +195,11 @@ function handleBuyExp(event) {
   event.preventDefault();
   shop.buyExp();
   if (shop.level < 9) {
-    levelProgress.innerText = `${shop.currentEpx}/${shop.expToNextLevel}`;
+    levelProgress.innerText = `Exp to Next Level: ${shop.currentEpx}/${shop.expToNextLevel}`;;
   } else {
-    levelProgress.innerText = shop.expToNextLevel;
+    levelProgress.innerText = `Exp to Next Level: ${shop.expToNextLevel} Level`;;
   }
-  level.innerText = shop.level;
+  level.innerText = `Lvl. ${shop.level}`;
   Shop.generateTierEls(odds, shop.level);
 }
 
@@ -244,7 +244,7 @@ function handleOpenModal(event) {
   modal.classList.remove("hidden");
   modal.children[0].classList.remove("hidden");
   message.classList.add("hidden");
-  message.innerText = "";
+  message.innerText = " ";
   restart.classList.add("hidden");
   clearInterval(time);
 }
@@ -281,7 +281,6 @@ function startRolldown() {
   time = setInterval(() => {
     if (timer.innerText > 0) {
       timer.innerText = Number(timer.innerText) - 1;
-      console.log(messageText.innerText);
     } else {
       stopRolldown();
     }

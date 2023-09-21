@@ -49,13 +49,13 @@ class Bench {
                 this.modal.classList.remove("hidden");
                 this.modal.children[0].classList.add("hidden");
                 this.messageModal.classList.remove("hidden");
-                this.messageModal.classList.toggle("error");
+                this.messageModal.classList.add("error");
                 this.messageText.innerText = "The bench is full.  Sell units to free up bench space.";
                 let error = setInterval(() => {
                     this.modal.classList.add("hidden");
                     this.messageModal.classList.add("hidden");
-                    this.messageText.innerText = "";
-                    this.messageModal.classList.toggle("error");
+                    // this.messageText.innerText = " ";
+                    this.messageModal.classList.remove("error");
                     clearInterval(error);
                 }, 1000);
             }
@@ -126,9 +126,9 @@ class Bench {
         const slotEl = document.createElement("div");
         slotEl.classList.add("slot");
         if (unitName === "empty") {
-            slotEl.classList.toggle("empty-bench-slot");
+            slotEl.classList.add("empty-bench-slot");
         } else {
-            slotEl.classList.toggle("one-star");
+            slotEl.classList.add("one-star");
             const unitIcon = document.createElement("img");
             unitIcon.dataset.slotKey = slotKey;
             unitIcon.dataset.unitName = unitName;
@@ -193,8 +193,8 @@ class Bench {
         }
         this.slots[firstCopySlotKey] = twoStarKey;
         const slot = this.#generateSlot(firstCopySlotKey, unitName);
-        slot.classList.toggle("two-star");
-        slot.classList.toggle("one-star");
+        slot.classList.add("two-star");
+        slot.classList.remove("one-star");
         this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
     }
 

@@ -15,20 +15,46 @@
         <div class="modal">
             <div class="modal-content">
                 <div class="welcome">
-                    <p class="welcome-title">Welcome to TFT StarUp!</p>
+                    <p class="welcome-title">Welcome to TFT Star Up!</p>
                     <br>
-                    <p>Instructions</p>
-                    <br>
-                    <p>TFT Star Up is a tool for practicing one's shop rerolling skills based on 
-                        gameplay from the auto battler videogame Teamfight Tactics (TFT).  The tool
-                        is comprised of The Shop
-                        is at the bottom of the screen and 
-                        Users may
-                        adjust the amount of time they have during a rolldown an
+                    <p>TFT Star Up is a tool for practicing one's rerolling skills based on 
+                        gameplay from the auto battler videogame Teamfight Tactics (TFT).  
+                        Players may need to refresh their shop multiple times (“rolling down”) 
+                        within a single planning phase to find particular units they want, and 
+                        how well they can repeatedly refresh and buy units within a short time 
+                        can often be the difference between victory and defeat.
                     </p>
-                    <ul>
-                        <li></li>
-                    </ul>
+                    <br>
+                    <p class="instructions">Controls</p>
+                    <br>
+                    <p>
+                        The tool focuses exclusively on the game aspects integral to rolling down: 
+                        the <span class="bold">Shop</span> and <span class="bold">Bench</span>.
+                    </p>
+                    <p>
+                        The <span class="bold">Shop</span> section at the bottom of the screen
+                        contains the 5 units you are offered at a time, which can be rerolled by 
+                        either pressing the <span class="bold">"D"</span> key or clicking on the 
+                        <span class="bold">"Refresh"</span> button.  Shop units will display their 
+                        name, image, and tier denoted by color (<span class="gray">gray</span> is
+                        the lowest,  <span class="gold">gold</span> is the highest).  Units have 
+                        certain odds of appearing in the shop based on their tier; as your level 
+                        increased, odds for higher tiers increase and odds for lower tiers decrease.  
+                        Units can be purchased by clicking on them, which will appear on the bench.
+                    </p>
+                    <br>
+                    <p>
+                        The <span class="bold">Bench</span> section above the Shop can hold up to 9
+                        units, which appear there when bought from the shop.  When a third copy of a 
+                        unit on the bench is purchased, the three copies combine to 
+                        <span class="bold">"star up"</span> that unit to a 2-star copy.  Units can be
+                        sold to free up bench space by hovering over them and pressing the 
+                        <span class="bold">"E"</span> key.
+                    </p>
+                    <br>
+                    <p>You may adjust certain settings for the rolldown before beginning.  Please enjoy!</p>
+                    <br>
+                    <p class="instructions">Rolldown Settings</p>
                     <br>
                     <form class="settings-form">
                         <label for="slider">Starting Time (<output id="seconds"></output> seconds)
@@ -39,7 +65,7 @@
                             60
                         </label>
                         <br>
-                        <br>
+                        <!-- <br> -->
                         <button class="section" type="submit">Start Rolldown</button>
                     </form>
                 </div>

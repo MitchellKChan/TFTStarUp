@@ -2,7 +2,7 @@
 
 ## Background
 
-TFT Star Up is a tool for practicing one’s shop rerolling skills based on 
+TFT Star Up is a tool for practicing one’s rerolling skills based on 
 gameplay from the auto battler videogame [Teamfight Tactics (TFT)].  Each 
 round in a TFT game begins with a timed planning phase in which players can 
 take several actions to strategize, such as:
@@ -14,24 +14,23 @@ high-tier units
 
 Players may need to refresh their shop multiple times (**“rolling down”**) 
 within a single planning phase to find particular units they want, and how
-well they can repeatedly refresh and buy within a short time can often 
+well they can repeatedly refresh and buy units within a short time can often 
 be the difference between victory and defeat.
 
 ## Functionality  & MVPs
 
 TFT Star Up's interface will resemble the user interface of TFT, but 
 user interaction will focus exclusively on the game aspects integral to 
-rolling down: the **shop** and **unit bench**.  In the tool, users will be 
+rolling down: the **shop** and **bench**.  In the tool, users will be 
 able to:
 
 - Configure settings for their rolldown, such as the timer
-- Make shop purchases by either clicking on a unit or by dragging it
-outside of the shop, which then appear on an empty bench slot
+- Make shop purchases by clicking on a unit from the shop, which then
+appear on an empty bench slot
 - Upgrade a bench unit's star level (**"star up"** a unit) when a third copy
 of a unit is purchased; two of the three copies will combine with the first,
 freeing up additional bench space to purchase more units
-- Sell a bench unit by presing "E" while hovering over it or by dragging it
-into the shop
+- Sell a bench unit by presing "E" while hovering over it
 
 Additionally, this project will include: 
 
@@ -44,17 +43,17 @@ for configuring rolldown settings
 ![wireframe](image.png)
 
 - Timer will show the configured time for the rolldown and can be configured
-- Nav links includes links to this project's Github repo and my LinkedIn
-by the user
+- Nav links includes links to this project's Github repo and the author's 
+LinkedIn profile
 - Settings Menu Button will open the Welcome modal that has instructions
 for the tool and input fields for configuring rolldown settings
-- The Unit Bench will show the purchased units, which can be sold by either
-dragging them over the Shop or pressing E while holding it or hovering over 
+- The Unit Bench will show the purchased units, which can be sold by
+pressing E while holding it or hovering over 
 it
-- Buy EXP and Refresh buttons will display the amount of gold they cost and 
-the hotkeys they are mapped to
-- Units can be purchased by either clicking or dragging them outside the 
-shop; they will display the unit's name, icon, traits, tier, and cost
+- Buy EXP and Refresh buttons will display the hotkeys they are mapped to 
+(F and D respectively)
+- Units can be purchased by clicking on them shop; they will display the 
+unit's name, icon, and tier
 
 ## Technologies, Libraries, APIs
 
@@ -94,6 +93,8 @@ There are many features this rolldown practice tool could eventually have
 available.  Some anticipated updates could allow users to:
 - Change the arena skin background
 - Move units around on the bench
+- Drag units out of the shop to buy them
+- Drag units off them bench to sell
 - Configure rolldown settings such as starting gold and starting bench units
 - Adjust the difficulty of rolldowns, such as changing unit appearance
 in the shop and toggling random changes to the unit pool
