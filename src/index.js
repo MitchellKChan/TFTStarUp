@@ -81,20 +81,19 @@ const githubIcon = document.createElement("img");
 const linkedLink = document.createElement("a");
 const linkedIcon = document.createElement("img");
 
-// set inner text and classess for top section objects
-// title.innerText = "TFT Star Up";
-// title.classList.add("title", "section");
-
 timer.innerText = slider.value;
 timer.classList.add("timer", "section");
 
-
 githubLink.href = "https://github.com/MitchellKChan/TFTStarUp";
+githubLink.target = "blank";
+githubLink.rel = "noopener noreferrer";
 githubIcon.src = "src/styles/github-mark.png";
 githubIcon.classList.add("social");
 githubLink.append(githubIcon);
 
 linkedLink.href = "https://www.linkedin.com/in/mitchellkchan/";
+linkedLink.target = "blank";
+linkedLink.rel = "noopener noreferrer";
 linkedIcon.src = "src/styles/linkedin_logo.png";
 linkedIcon.classList.add("social");
 linkedLink.append(linkedIcon);
