@@ -12,17 +12,18 @@ high-tier units
 - Spend gold to buy units offered to them in their shop
 - Refresh their shop to try finding specific copies of units
 
+![intro](intro.png)
+
 Players may need to refresh their shop multiple times (**“rolling down”**) 
 within a single planning phase to find particular units they want, and how
 well they can repeatedly refresh and buy units within a short time can often 
 be the difference between victory and defeat.
 
-## Functionality  & MVPs
+## How to Use
 
-TFT Star Up's interface will resemble the user interface of TFT, but 
-user interaction will focus exclusively on the game aspects integral to 
-rolling down: the **shop** and **bench**.  In the tool, users will be 
-able to:
+TFT Star Up's interface resembles the user interface of TFT, but 
+user interaction focuses exclusively on the game aspects integral to 
+rolling down: the **shop** and **bench**.  In the tool, users are able to:
 
 - Configure settings for their rolldown, such as the timer
 - Make shop purchases by clicking on a unit from the shop, which then
@@ -32,65 +33,21 @@ of a unit is purchased; two of the three copies will combine with the first,
 freeing up additional bench space to purchase more units
 - Sell a bench unit by presing "E" while hovering over it
 
-Additionally, this project will include: 
-
-- A **Welcome** modal describing how to use the tool and input fields 
-for configuring rolldown settings
-- A production README
-
-## Wireframes
-
-![wireframe](image.png)
-
-- Timer will show the configured time for the rolldown and can be configured
-- Nav links includes links to this project's Github repo and the author's 
-LinkedIn profile
-- Settings Menu Button will open the Welcome modal that has instructions
-for the tool and input fields for configuring rolldown settings
-- The Unit Bench will show the purchased units, which can be sold by
-pressing E while holding it or hovering over 
-it
-- Buy EXP and Refresh buttons will display the hotkeys they are mapped to 
-(F and D respectively)
-- Units can be purchased by clicking on them shop; they will display the 
-unit's name, icon, and tier
+Additionally, this project a **Welcome** modal describing how to use the tool 
+and input fields for configuring rolldown settings
 
 ## Technologies, Libraries, APIs
 
-This project will be implemented with the following technologies:
+This project is implemented with the following technologies:
 
 - Static TFT set data from [Riot Games’ developer portal site]
 - `Webpack` and `Babel` to bundle and transpile the source JavaScript code
 - `npm` to manage project dependencies
 
-## Implementation Timeline
-
-- Friday Afternoon & Weekend: Setup project, including getting webpack up
-and running. Create Shop, Bench, and Unit classes. Get HTML elements 
-rendered to the webpage reflecting the overall layout of the site.
-
-- Monday: Dedicate this day toward implementing the underlying logic of 
-TFT Star Up. Ensure that I buy units, experience, and shop refreshes and  
-have the correseponding objects updated appropriately. If there is 
-time, make sure this is all rendered correctly on the webpage.
-
-- Tuesday: If I didn't get to it already, get the shop, units, and bench 
-correctly rendered on the webpage. Make sure they rerender correctly when I
-make a purchase or sell a unit. Then, focus on rolldown setting 
-configuration: adjusting starting time, starting gold, starting level, and 
-starting units on bench.
-
-- Wednesday: Finish implementing user controls, and focus on styling, as 
-well as implementing the different unit tier color schemes and nav links. 
-If time, start on bonuses.
-
-- Thursday Morning: Deploy to GitHub pages. If time, rewrite this proposal 
-as a production README.
-
 ## Bonus Features
 
-There are many features this rolldown practice tool could eventually have 
-available.  Some anticipated updates could allow users to:
+There are many features this rolldown practice tool could eventually have. 
+Some anticipated updates could allow users to:
 - Change the arena skin background
 - Move units around on the bench
 - Drag units out of the shop to buy them
