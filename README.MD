@@ -1,5 +1,7 @@
 # TFT Star Up
 
+![Live Site](https://mitchellkchan.github.io/TFTStarUp/)
+
 ## Background
 
 TFT Star Up is a tool for practicing one’s rerolling skills based on 
