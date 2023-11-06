@@ -82,11 +82,26 @@ class Shop {
             name.classList.add("shop-unit-name");
             slotEl.append(icon, name);
             slotEl.classList.add("section", "shop-unit", `tier-${unit.tier}`);
+
             // add unit name as data attribute for populating bench spaces with correct unit icon
             for (const child of slotEl.children) {
                 child.dataset.unitName = unit.name;
                 child.dataset.slotKey = slotKey;
             }
+
+            
+            // add hover effect to shop slot to highlight bench space the bought unit would appear on,
+            // as well as style shop slot background color being hovered
+            const nextBenchSlot = document.querySelector(".empty-bench-slot");
+
+            slotEl.addEventListener("mouseenter", e => {
+                e.target.classList.add("shop-hover");
+                nextBenchSlot.classList.add("next-slot");
+            });
+            slotEl.addEventListener("mouseleave", e => {
+                e.target.classList.remove("shop-hover");
+                nextBenchSlot.classList.remove("next-slot");
+            });
         }
         return slotEl;
     }

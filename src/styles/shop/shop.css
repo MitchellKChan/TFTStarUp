@@ -101,6 +101,11 @@
     background-color: var(--tier-5);
 }
 
+.shop-hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
 .odds{
     display: flex;
 }

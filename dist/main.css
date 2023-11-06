@@ -314,6 +314,11 @@ button {
     background-color: var(--tier-5);
 }
 
+.shop-hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+
 .odds{
     display: flex;
 }
@@ -400,9 +405,14 @@ button {
     text-align: center;
 }
 
+
 .empty-bench-slot {
     /* 0.0 opacity for a "transparent border" when a slot has no unit */
     border-color: rgba(255, 255, 255, 0.0);
+}
+
+.next-slot {
+    border-color: #000000;
 }
 
 .one-star {
