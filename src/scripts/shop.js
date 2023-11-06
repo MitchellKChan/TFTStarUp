@@ -92,14 +92,15 @@ class Shop {
             
             // add hover effect to shop slot to highlight bench space the bought unit would appear on,
             // as well as style shop slot background color being hovered
-            const nextBenchSlot = document.querySelector(".empty-bench-slot");
 
             slotEl.addEventListener("mouseenter", e => {
                 e.target.classList.add("shop-hover");
+                const nextBenchSlot = document.querySelector(".empty-bench-slot");
                 nextBenchSlot.classList.add("next-slot");
             });
             slotEl.addEventListener("mouseleave", e => {
                 e.target.classList.remove("shop-hover");
+                const nextBenchSlot = document.querySelector(".empty-bench-slot");
                 nextBenchSlot.classList.remove("next-slot");
             });
         }
