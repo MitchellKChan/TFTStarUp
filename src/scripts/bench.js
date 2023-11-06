@@ -129,12 +129,18 @@ class Bench {
             slotEl.classList.add("empty-bench-slot");
         } else {
             slotEl.classList.add("one-star");
+            // create child img for bench slot
             const unitIcon = document.createElement("img");
             unitIcon.dataset.slotKey = slotKey;
             unitIcon.dataset.unitName = unitName;
             unitIcon.dataset.onBench = "true";
             unitIcon.src = this.benchUnitImage(unitName);
-            slotEl.append(unitIcon);
+
+            // create child div for bench unit's star level
+            const starLevelDiv = document.createElement("div");
+            starLevelDiv.innerText = "⭐️";
+            starLevelDiv.classList.add("star-level");
+            slotEl.append(unitIcon, starLevelDiv);
         }
         return slotEl;
     }
@@ -195,6 +201,9 @@ class Bench {
         const slot = this.#generateSlot(firstCopySlotKey, unitName);
         slot.classList.add("two-star");
         slot.classList.remove("one-star");
+
+        // add star to star-level div
+        slot.children[1].innerText = "⭐️ ⭐️"
         this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
     }
 
@@ -216,6 +225,9 @@ class Bench {
         const slot = this.#generateSlot(firstCopySlotKey, unitName);
         slot.classList.remove("one-star", "two-star");
         slot.classList.add("three-star");
+
+        // add star to star-level div
+        slot.children[1].innerText = "⭐️ ⭐️ ⭐️"
         this.benchEl.replaceChild(slot, this.benchEl.children[firstCopyIndex]);
     }
 
