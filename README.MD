@@ -1,6 +1,6 @@
 # TFT Star Up
 
-![Live Site](https://mitchellkchan.github.io/TFTStarUp/)
+[Live Site](https://mitchellkchan.github.io/TFTStarUp/)
 
 ## Background
 
